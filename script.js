@@ -136,6 +136,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Product-aware downloads. Each product release uses a product-prefixed tag
+    // (for example credarx-v1.0.0), so "latest" cannot accidentally point to
+    // another vertical's installer.
+    const productCatalog = {
+        crederp: { name: 'CredaERP', tagPrefix: 'v', assetPrefix: 'CredaERP' },
+        credarx: { name: 'CredaRx', tagPrefix: 'credarx-v', assetPrefix: 'CredaRx' },
+        credaretail: { name: 'CredaRetail', tagPrefix: 'credaretail-v', assetPrefix: 'CredaRetail' }
+    };
+    const requestedProduct = new URLSearchParams(window.location.search).get('product');
+    const productKey = (requestedProduct || document.body.dataset.product || 'crederp').toLowerCase();
+    const activeProduct = productCatalog[productKey] || productCatalog.crederp;
+    document.querySelectorAll('[data-product-name]').forEach((node) => {
+        node.textContent = activeProduct.name;
+    });
+
+    const releaseApi = 'https://api.github.com/repos/credaerp-admin/medicines-catalog/releases?per_page=100';
+    const downloadLinks = {
+        windows: `${activeProduct.assetPrefix}-Windows.exe`,
+        'mac-silicon': `${activeProduct.assetPrefix}-macOS-AppleSilicon.dmg`,
+        'mac-intel': `${activeProduct.assetPrefix}-macOS-Intel.dmg`
+    };
+    const setDownloadLinks = (release) => {
+        document.querySelectorAll('[data-download]').forEach((link) => {
+            const asset = downloadLinks[link.dataset.download];
+            const base = release && release.tag_name
+                ? `https://github.com/credaerp-admin/medicines-catalog/releases/download/${encodeURIComponent(release.tag_name)}/`
+                : '';
+            link.href = base ? base + encodeURIComponent(asset) : '#';
+            link.classList.toggle('download-unavailable', !base);
+            link.setAttribute('aria-disabled', String(!base));
+            link.setAttribute('aria-label', `${activeProduct.name} ${link.textContent.trim()}`);
+        });
+    };
+    fetch(releaseApi)
+        .then((response) => response.ok ? response.json() : Promise.reject(new Error('release lookup failed')))
+        .then((releases) => {
+            const prefix = activeProduct.tagPrefix.toLowerCase();
+            const release = releases.find((candidate) => !candidate.draft && !candidate.prerelease
+                && candidate.tag_name.toLowerCase().startsWith(prefix));
+            setDownloadLinks(release);
+        })
+        .catch(() => setDownloadLinks(null));
+
     // Form submission handler (Netlify Forms via AJAX)
     if (demoForm) {
         demoForm.addEventListener('submit', (e) => {
@@ -159,18 +202,22 @@ document.addEventListener('DOMContentLoaded', () => {
                      <div style="text-align: center; padding: 1.5rem 0 0.5rem 0;">
                          <div style="font-size: 3.5rem; color: var(--color-success); margin-bottom: 0.75rem;">✓</div>
                          <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; color: #fff;">Request Received!</h3>
-                         <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5;">Thank you! We will reach out to you on WhatsApp within 2 hours with your trial license key. You can download the client installer now:</p>
+                         <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5;">Thank you! We will reach out to you on WhatsApp within 2 hours with your trial license key. You can download ${activeProduct.name} now:</p>
                          
                          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; text-align: left;">
-                             <a href="https://github.com/credaerp-admin/medicines-catalog/releases/latest/download/CredaERP-Windows.exe" class="cta-btn cta-btn-primary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">🖥️ Download for Windows (.exe)</a>
-                             <a href="https://github.com/credaerp-admin/medicines-catalog/releases/latest/download/CredaERP-macOS-AppleSilicon.dmg" class="cta-btn cta-btn-secondary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">🍏 Download for macOS (Apple Silicon M1/M2/M3)</a>
-                             <a href="https://github.com/credaerp-admin/medicines-catalog/releases/latest/download/CredaERP-macOS-Intel.dmg" class="cta-btn cta-btn-secondary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">💻 Download for macOS (Intel Chip)</a>
+                             <a data-modal-download="windows" href="#" class="cta-btn cta-btn-primary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">🖥️ Download ${activeProduct.name} for Windows (.exe)</a>
+                             <a data-modal-download="mac-silicon" href="#" class="cta-btn cta-btn-secondary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">🍏 Download ${activeProduct.name} for macOS (Apple Silicon)</a>
+                             <a data-modal-download="mac-intel" href="#" class="cta-btn cta-btn-secondary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">💻 Download ${activeProduct.name} for macOS (Intel)</a>
                          </div>
                          
                          <button class="form-submit-btn close-success-btn" style="max-width: 200px; margin: 0 auto;">Close</button>
                      </div>
                  `;
                 
+                document.querySelectorAll('[data-download]').forEach((source) => {
+                    const target = modalContent.querySelector(`[data-modal-download="${source.dataset.download}"]`);
+                    if (target) target.href = source.href;
+                });
                 const successCloseHandler = () => {
                     modal.classList.remove('active');
                     setTimeout(() => {

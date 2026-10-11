@@ -116,6 +116,62 @@ body::after {
     object-fit: cover;
 }
 
+.product-nav-logo {
+    display: block;
+    width: 190px;
+    height: 58px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.product-nav-logo img,
+.product-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.product-logo {
+    width: 150px;
+    height: 48px;
+    border-radius: 6px;
+    margin-right: .25rem;
+}
+
+/* Child-brand lockups keep the approved Creda mark and replace only ERP with
+   the product suffix: Rx or Retail. */
+.brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 8px;
+    background-image: url('images/logo.jpg');
+    background-repeat: no-repeat;
+    background-size: 153px 153px;
+    background-position: -7px -52px;
+}
+
+.brand-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -.055em;
+}
+
+.brand-name strong {
+    color: #1da7e8;
+    font-weight: 800;
+}
+
 .logo span {
     color: var(--color-secondary);
     background: linear-gradient(135deg, #3b82f6 0%, #22c55e 100%);
