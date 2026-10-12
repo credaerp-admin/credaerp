@@ -778,6 +778,7 @@
                                 <tr><td>Business identity</td><td><strong>System Settings → Business Profile</strong></td><td>Business name, GSTIN, address and licence details are correct in the invoice/receipt preview.</td></tr>
                                 <tr><td>User access</td><td><strong>System Settings → User Management</strong></td><td>Each operator has an individual account and the least-privileged suitable role.</td></tr>
                                 <tr><td>Printer</td><td><strong>System Settings → Printer Settings → Preview Print</strong></td><td>Printer, paper, orientation, logo, GST summary, licence and footer are correct.</td></tr>
+                                <tr><td>Application version</td><td><strong>System Settings → 🔄 Software Updates</strong></td><td>The current version is displayed and any available update can be reviewed before applying it.</td></tr>
                                 <tr><td>Item master</td><td><strong>Inventory → Inventory List</strong></td><td>Barcode, HSN, tax, schedule, rack, MRP, selling rate and reorder level are correct.</td></tr>
                                 <tr><td>Opening stock</td><td><strong>Inventory → 📈 Stock → Opening Stock / Import</strong></td><td>Loaded batch, expiry, quantity, purchase rate, MRP and selling rate match the approved source sheet.</td></tr>
                                 <tr><td>Sale and payment</td><td><strong>POS Terminal</strong> in Training Mode</td><td>Customer is selected, invoice saves/prints, stock reduces, and payment appears in history.</td></tr>
@@ -1584,9 +1585,18 @@
                     <h3>Barcode labels and reference-data imports</h3>
                     <ul>
                         <li><strong>One item/batch:</strong> open <strong>Inventory → Inventory List</strong>, choose the item’s barcode action, select the active batch, verify batch number, expiry, MRP/price, label dimensions and copy count, then choose <strong>🖨️ Print Labels</strong> or <strong>💾 Save PDF</strong>. Test one label before printing a batch.</li>
-                        <li><strong>Many items:</strong> choose <strong>Inventory → Print Barcodes</strong>, review selected products and stock, set Print Copies per row, inspect the selected-item preview, then choose <strong>🏷️ Print All</strong> or <strong>Save PDF</strong>.</li>
+                        <li><strong>Many items:</strong> choose <strong>Inventory → Print Barcodes → Bulk Print Barcode Labels</strong>, review selected products and stock, set Print Copies per row, inspect the selected-item preview, then choose <strong>🏷️ Print All</strong> or <strong>Save PDF</strong>.</li>
                         <li><strong>Medicine/HSN import:</strong> choose <strong>Inventory → Import → Medicine &amp; HSN Master Tools</strong>, select the CSV, map Brand Name (required) and the available Generic Name, HSN Code, Category, Manufacturer, MRP, Pack Size Label, Unit Name and Net Content columns, then choose <strong>Start Import</strong>. For the official directory, select the HSN CSV and choose <strong>Import GST HSN Directory</strong>; review <strong>Auto-Map Missing HSN</strong> suggestions and <strong>Export Pending Review CSV</strong> before accepting unresolved rows.</li>
                     </ul>
+
+                    <h3>Reports and history screens</h3>
+                    <ul>
+                        <li><strong>Sales Return History:</strong> open <strong>POS → 📜 Invoice History → Sales Return History</strong>, search by Return No or Invoice No, and use <strong>🖨️ Print Credit Note</strong> only after checking the original invoice, return amount and reason.</li>
+                        <li><strong>Expiry Report:</strong> open <strong>Inventory → Reports → Expiry Report</strong> for the concise item/batch/expiry/quantity view; use <strong>Expiry Register</strong> when you need date-range, manufacturer, purchase-rate and total-value analysis.</li>
+                    </ul>
+
+                    <h3>Patient registration screen name</h3>
+                    <p>The customer form is titled <strong>Patient Registration</strong> even though the navigation entry is <strong>Customers</strong>. Use <strong>Customers → ➕ NEW PATIENT</strong>, complete the required identity/contact fields, and choose <strong>Complete Registration</strong>. Search the saved patient from the customer selector before using the record in a sale.</p>
 
                     <h3>Financial year-end closure</h3>
                     <ol>
