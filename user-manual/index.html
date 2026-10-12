@@ -489,6 +489,7 @@
             <ul class="sidebar-nav" id="navMenu">
                 <li><a href="#quick-action" class="active">Quick Action Index (Tasks)</a></li>
                 <li><a href="#stuck-support">I’m Stuck — Fix It Now</a></li>
+                <li><a href="#self-service">Onboarding & Self-Service</a></li>
                 <li><a href="#getting-started">Day 1: Setup & Operations</a></li>
                 <li><a href="#sales-billing">Sales & POS Workflows</a></li>
                 <li><a href="#executive-dashboard">Executive Dashboard</a></li>
@@ -499,7 +500,7 @@
                 <li><a href="#inventory">Inventory & Expiry Mgt</a></li>
                 <li><a href="#reports">Reports & Analytics</a></li>
                 <li><a href="#eod-closure">EOD Master Guide</a></li>
-                <li><a href="#gst-compliance">DIY GST Filing Guide</a></li>
+                <li><a href="#gst-compliance">GST Filing &amp; CA Handoff</a></li>
                 <li><a href="#migration">Safe Migration Guide</a></li>
                 <li><a href="#backup-restore">Disaster Recovery</a></li>
                 <li><a href="#support-diagnostics">Support Diagnostics</a></li>
@@ -580,13 +581,43 @@
                                     <td></td>
                                 </tr>
                                 <tr>
+                                    <td><strong>Track IRN / E-Invoice Status</strong></td>
+                                    <td>FINANCIALS &rarr; E-Invoice (IRN)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Review GST Liability / ITC</strong></td>
+                                    <td>FINANCIALS &rarr; CA Dashboard</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ask a business question</strong></td>
+                                    <td>INSIGHTS &amp; AI &rarr; Business Assistant</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Forecast reorder risk</strong></td>
+                                    <td>INSIGHTS &amp; AI &rarr; Stock Forecasting</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Review clinical analytics</strong></td>
+                                    <td>INSIGHTS &amp; AI &rarr; Clinical Analytics</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Investigate technical health</strong></td>
+                                    <td>MAINTENANCE &rarr; Diagnostics</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <td><strong>Review Supplier Outstanding</strong></td>
                                     <td>OPERATIONS &rarr; Vendors</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Backup the Database</strong></td>
-                                    <td>MAINTENANCE &rarr; System Settings &rarr; Database</td>
+                                    <td>MAINTENANCE &rarr; System Settings &rarr; Backup &amp; Restore</td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -630,7 +661,7 @@
                             <ol>
                                 <li>Search using the first few letters, not the full brand name.</li>
                                 <li>Try the generic name, alternate spelling or barcode.</li>
-                                <li>Check <strong>Inventory → Medicine Master</strong>.</li>
+                                <li>Check <strong>Inventory → Inventory List</strong> and <strong>⚙️ Setup → Item Setup</strong>.</li>
                                 <li>If it is missing, add it or use Bulk Import, then return to billing and search again.</li>
                             </ol>
                             <p class="help-result"><strong>Still missing?</strong> Confirm you are in the correct store/company profile before importing the item.</p>
@@ -668,7 +699,7 @@
                                 <li>Identify the exact medicine, batch and unit that is wrong.</li>
                                 <li>Check Invoice History for sales and Purchase Register for inward stock.</li>
                                 <li>Check Sales Returns and Purchase Returns before adjusting anything.</li>
-                                <li>Use <strong>Inventory → Stock Entry / Adjustment</strong> only for a verified physical count difference.</li>
+                                <li>Use <strong>Inventory → 📈 Stock → Stock Adjustment</strong> only for a verified physical count difference.</li>
                             </ol>
                             <p class="help-result"><strong>Never fix stock by entering a fake purchase or sale.</strong> That changes your reports and tax data.</p>
                         </article>
@@ -704,7 +735,7 @@
                                 <li>Do not click Save repeatedly.</li>
                                 <li>Check the relevant history list to see whether the action completed.</li>
                                 <li>If safe to do so, close and reopen the application, then verify the last transaction.</li>
-                                <li>If it repeats, open <strong>Support & Diagnostics</strong> and create a support bundle.</li>
+                                <li>If it repeats, open <strong>Diagnostics → Support &amp; Logs</strong> and create a support bundle.</li>
                             </ol>
                         </article>
 
@@ -715,7 +746,7 @@
                                 <li>Confirm you opened the same store/company profile and machine.</li>
                                 <li>Check the relevant history/register before assuming data was lost.</li>
                                 <li>Do not restore a backup over the current database until you know which copy is correct.</li>
-                                <li>Open Support & Diagnostics and generate a support bundle.</li>
+                                <li>Open <strong>Diagnostics → Health &amp; Diagnostics</strong> and generate a support bundle from <strong>Support &amp; Logs</strong>.</li>
                             </ol>
                         </article>
                     </div>
@@ -727,6 +758,56 @@
                     </div>
                 </section>
 
+                <!-- Self-service onboarding and acceptance -->
+                <section id="self-service">
+                    <h2>Onboarding & Self-Service Control Center</h2>
+                    <p>Use this section as the store’s first-week runbook. Complete the checks in Training Mode first, record the expected result, and switch to Production only after the owner or manager signs off.</p>
+
+                    <div class="callout warning">
+                        <div class="callout-header">🛑 Production safety rule</div>
+                        <p>Before any real transaction, verify that the header says <strong>Environment: Production</strong>. For practice, verify <strong>TRAINING SANDBOX</strong> and <strong>Environment: Training Sandbox</strong>. Never rely on memory or another operator’s login.</p>
+                    </div>
+
+                    <h3>First-day acceptance checklist</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Check</th><th>Where to click</th><th>Expected result</th></tr></thead>
+                            <tbody>
+                                <tr><td>Business identity</td><td><strong>System Settings → Business Profile</strong></td><td>Business name, GSTIN, address and licence details are correct in the invoice/receipt preview.</td></tr>
+                                <tr><td>User access</td><td><strong>System Settings → User Management</strong></td><td>Each operator has an individual account and the least-privileged suitable role.</td></tr>
+                                <tr><td>Printer</td><td><strong>System Settings → Printer Settings → Preview Print</strong></td><td>Printer, paper, orientation, logo, GST summary, licence and footer are correct.</td></tr>
+                                <tr><td>Item master</td><td><strong>Inventory → Inventory List</strong></td><td>Barcode, HSN, tax, schedule, rack, MRP, selling rate and reorder level are correct.</td></tr>
+                                <tr><td>Opening stock</td><td><strong>Inventory → 📈 Stock → Opening Stock / Import</strong></td><td>Loaded batch, expiry, quantity, purchase rate, MRP and selling rate match the approved source sheet.</td></tr>
+                                <tr><td>Sale and payment</td><td><strong>POS Terminal</strong> in Training Mode</td><td>Customer is selected, invoice saves/prints, stock reduces, and payment appears in history.</td></tr>
+                                <tr><td>Credit collection</td><td><strong>Customers → Receive Payment → Confirm Receipt</strong></td><td>Customer balance increases on credit sale and reduces after the receipt is confirmed.</td></tr>
+                                <tr><td>Return</td><td><strong>POS → 📜 Invoice History → Process Return</strong></td><td>Return/credit-note number is generated and its status is visible.</td></tr>
+                                <tr><td>Shift closure</td><td><strong>Day Closure (EOD)</strong></td><td>Cash, UPI and card reconciliation completes and closure appears in history.</td></tr>
+                                <tr><td>Health evidence</td><td><strong>Diagnostics → Health & Diagnostics → Refresh Status</strong></td><td>Application, database and backup health are visible; a health report can be exported.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Role-based first day</h3>
+                    <ul>
+                        <li><strong>Cashier:</strong> login, environment check, shift start, sale, hold/resume, payment, print and handoff.</li>
+                        <li><strong>Pharmacist:</strong> cashier path plus customer/prescription details, controlled medicines, returns and expiry review.</li>
+                        <li><strong>Stock manager:</strong> item setup, opening stock, procurement, purchase return, expiry issue, stock adjustment and expiry export.</li>
+                        <li><strong>Manager/owner:</strong> users, business profile, printer, backups, GST/IRN queues, reports, day closure and year-end controls.</li>
+                        <li><strong>Accountant/CA:</strong> sales/purchase registers, GST Filing, 2B reconciliation, CA Dashboard, reports and journal-voucher approval.</li>
+                    </ul>
+
+                    <h3>Daily handoff checkpoint</h3>
+                    <p>The incoming operator must be able to identify the environment, active shift, last closure, and first invoice/order reference of the day. If one cannot be confirmed, stop billing and ask the manager before creating a transaction.</p>
+
+                    <h3>Safe correction rules</h3>
+                    <ul>
+                        <li>Before saving: cancel or clear the form and correct the item, customer or vendor master.</li>
+                        <li>After saving: use the approved return, purchase return, credit note, payment or Stock Adjustment workflow; never edit database files or create a fake balancing sale/purchase.</li>
+                        <li>After a timeout: search Invoice History, Purchase Invoice Register or Return Register before retrying.</li>
+                        <li>For a closed period: do not bypass the lock; keep the original reference and obtain accountant/manager approval.</li>
+                    </ul>
+                </section>
+
                 <!-- Getting Started -->
                 <section id="getting-started">
                     <h2>1. Getting Started: First 7 Days Guide</h2>
@@ -735,7 +816,7 @@
                     <h3>Day 1: Setup & Initial Balances</h3>
                     <ol>
                         <li><strong>Pharmacy Profile</strong>: Navigate to <em>System Settings &rarr; Company Profile</em>. Enter your Pharmacy Name, accurate GSTIN, and Registered Address. This data prints on your invoices and GSTR-1 files.</li>
-                        <li><strong>Populate Medicine Master</strong>: Use the <em>Bulk Import</em> tool to load your medicines.</li>
+                        <li><strong>Populate Item Master</strong>: Use <em>Inventory → Inventory List → Import</em> or the applicable bulk-import tool, then verify the imported items before loading stock.</li>
                         <li><strong>Enter Opening Stock</strong>: Go to <em>Inventory &rarr; Stock Entry</em> to map the physical boxes currently sitting on your shelves.</li>
                     </ol>
                     
@@ -1144,6 +1225,8 @@
 <!-- GST Compliance -->
                 <!-- GST Compliance -->
                 <section id="gst-compliance">
+                    <h2>9. Financial Compliance Workspaces</h2>
+                    <p>Use the current GST Filing, CA Dashboard and Reports &amp; Analytics screens to prepare and review period data. The Day Closure workflow immediately follows because a closed shift is part of the period-control process.</p>
                     
                 <!-- Day Closure (EOD) -->
                 <section id="eod-closure">
@@ -1164,19 +1247,18 @@
                         <p><strong>The EOD will be BLOCKED if:</strong></p>
                         <ul>
                             <li><strong>You have Held/Suspended Bills:</strong> If a cashier suspended a bill during rush hour and forgot about it, you must recall it in the POS (<kbd>F1</kbd>) and either complete the sale or cancel it.</li>
-                            <li><strong>You have Pending Advance Orders:</strong> All advance orders scheduled for today must be marked as fulfilled or cancelled.</li>
+                            <li><strong>Displayed blockers:</strong> Resolve every validation or open-shift warning shown by the screen before continuing. Do not invent a workaround for a blocker.</li>
                         </ul>
                     </div>
 
                     <div class="step-card">
                         <div class="step-number">STEP 2</div>
                         <h4>Cash Drawer Reconciliation</h4>
-                        <p>Once pre-flight passes, the screen will show you the <strong>Expected Cash</strong>. This is calculated as:</p>
-                        <p><em>(Morning Opening Balance) + (Cash Sales) + (Customer Credit Collections) - (Vendor Payments) - (Shop Expenses)</em></p>
+                        <p>Once the screen is ready, review its calculated <strong>System Cash</strong>, <strong>System UPI</strong>, <strong>System Card</strong> and <strong>EXPECTED TOTAL</strong>. Use the values shown by the application as authoritative for the active shift; do not recreate the formula in a spreadsheet.</p>
                         <ol>
                             <li>Empty your physical cash drawer.</li>
                             <li>Count every note and coin.</li>
-                            <li>Type the actual physical total into the <strong>Actual Cash</strong> box.</li>
+                            <li>Type the actual physical total into <strong>Actual Cash Counted in Drawer (Rs)</strong>, or use <strong>Denominations</strong>.</li>
                         </ol>
                     </div>
 
@@ -1186,7 +1268,7 @@
                         <p>Do not just assume the UPI machine matches the software.</p>
                         <ol>
                             <li>Print the "Batch Settlement Slip" from your physical Card/UPI swiping machine (e.g., PineLabs / Paytm Soundbox).</li>
-                            <li>Compare the total on the printed slip with the <strong>Expected UPI/Card</strong> on the CredaERP screen.</li>
+                            <li>Compare the printed totals with <strong>Actual Card (EDC Total)</strong>, <strong>Actual UPI (Batch Total)</strong> and the corresponding system totals.</li>
                             <li>If they match, you are perfectly reconciled. If they don't, check <em>Invoice History</em> to see if a cashier clicked "Cash" when the customer actually paid via UPI.</li>
                         </ol>
                     </div>
@@ -1194,16 +1276,16 @@
                     <div class="step-card">
                         <div class="step-number">STEP 4</div>
                         <h4>Handle Shortages & Lock the Day</h4>
-                        <p>If your actual cash is Rs. 50 less than the expected cash, CredaERP will highlight the difference in red. You cannot close the day with an unexplained difference.</p>
+                        <p>If your actual cash differs from the system value, CredaERP highlights <strong>Cash Short/Excess</strong>. Enter the reason in <strong>Closure Notes / Discrepancy Reason</strong>; do not create an artificial sale, purchase or expense just to force the numbers to match.</p>
                         <ul>
-                            <li><strong>To fix a shortage:</strong> Did you buy tea for the staff and forget to enter it? Go to <em>FINANCIALS &rarr; Journal Voucher</em> and add a Rs. 50 expense. Come back to EOD, and the expected cash will drop to match your physical cash.</li>
-                            <li><strong>Locking:</strong> Once the difference is 0, click <strong>Close Day</strong>. The system will securely lock all invoices, seal the ledger, and log out the shift.</li>
+                            <li><strong>For a shortage/excess:</strong> recount, compare the cash/card/UPI evidence, and record a truthful reason. Use a Journal Voucher only for an accountant-approved accounting event—not as a cash-count workaround.</li>
+                            <li><strong>Locking:</strong> Review the difference and notes, then click <strong>🔒 Submit Day Closure</strong> and confirm. The screen warns that this is a strict audit event that cannot be edited or rolled back.</li>
                         </ul>
                     </div>
                 </section>
 
-                    <h2>11. DIY Guide: How to File Your Own GST (No CA Required)</h2>
-                    <p>CredaERP is designed so intuitively that pharmacy owners can bypass expensive CA fees and file their own GST returns directly. The Government GST portal requires two main filings every month (or quarter): <strong>GSTR-1</strong> (Your Sales) and <strong>GSTR-3B</strong> (Your Tax Payment).</p>
+                    <h2>11. GST Filing, Reconciliation &amp; CA Handoff</h2>
+                    <p>CredaERP prepares GST workpapers, reconciliations and export packs. It does not replace statutory review, filing responsibility, or professional advice. Use the current <strong>GST Filing</strong>, <strong>CA Dashboard</strong> and <strong>Reports &amp; Analytics</strong> screens, then have the owner and qualified CA/GST practitioner review the period before filing.</p>
 
                     <div class="callout success">
                         <div class="callout-header">💡 The Golden Rule of GST</div>
@@ -1214,9 +1296,8 @@
 
                     <div class="step-card">
                         <div class="step-number">STEP 1</div>
-                        <h4>Fix Data Errors (Correction Center)</h4>
-                        <p>Go to <strong>FINANCIALS &rarr; GST Filing &rarr; Correction Center</strong>.</p>
-                        <p>CredaERP automatically scans your entire database for the selected month. If you accidentally entered a 14-digit GSTIN instead of 15 digits, or sold a B2B invoice to a clinic but forgot their GSTIN, the Correction Center will list it here.</p>
+                        <h4>Review data and diagnostics</h4>
+                        <p>Open <strong>FINANCIALS &rarr; GST Filing</strong>, select the tax period, and review the dashboard/status and filing tabs. Use <strong>Reports &amp; Analytics</strong> for Tax Integrity, Period Overview, HSN Summary and the relevant reconciliation workspaces.</p>
                         <ul>
                             <li><span class="badge warning">Action Required</span> You must resolve all <strong>Red (High Severity)</strong> warnings before proceeding. The GST portal will reject your file if these exist.</li>
                             <li>Simply click on the error, fix the value, and save.</li>
@@ -1240,7 +1321,7 @@
                     <div class="step-card">
                         <div class="step-number">STEP 3</div>
                         <h4>Generate & Upload GSTR-1 (Your Sales)</h4>
-                        <p>GSTR-1 tells the government exactly what you sold. It must be filed by the 11th of the next month.</p>
+                        <p>GSTR-1 contains the outward-supply data prepared for the selected period. Confirm the applicable scheme and current due date on the GST portal or with the CA; do not rely on a hard-coded date in this manual.</p>
                         <ol>
                             <li>In CredaERP, go to <strong>FINANCIALS &rarr; GST Filing &rarr; GSTR-1 Details</strong>.</li>
                             <li>Select the month and click <strong>Generate GSTR-1</strong>.</li>
@@ -1254,9 +1335,9 @@
                     <div class="step-card">
                         <div class="step-number">STEP 4</div>
                         <h4>File GSTR-3B (Tax Payment)</h4>
-                        <p>GSTR-3B is where you actually pay the tax. It must be filed by the 20th of the next month. The government auto-populates this form based on your GSTR-1 (Output Tax) and GSTR-2B (Input Tax).</p>
+                        <p>GSTR-3B is the tax-payment return. Confirm the applicable scheme and current due date on the GST portal or with the CA. Compare the portal values with CredaERP’s reviewed period data before payment.</p>
                         <ol>
-                            <li>In CredaERP, go to <strong>FINANCIALS &rarr; GST Filing &rarr; GSTR-3B Summary</strong>.</li>
+                            <li>In CredaERP, go to <strong>FINANCIALS &rarr; GST Filing</strong> and review the Net Tax Liability (3B) card and available filing workspace.</li>
                             <li>This screen shows you what your books say you owe. <strong>Total Tax on Sales minus Total Tax on Purchases.</strong></li>
                             <li>On the Government GST Portal, open the GSTR-3B form.</li>
                             <li><span class="badge warning">Crucial Check</span> Compare the numbers on the Government Portal with the numbers on the CredaERP screen. They should match perfectly. (Minor penny differences are normal due to rounding).</li>
@@ -1265,7 +1346,7 @@
                     </div>
 
                     <h3>Understanding the CA Dashboard</h3>
-                    <p>Even if you file yourself, the <strong>CA Dashboard</strong> is highly useful for owners. It provides a real-time health check:</p>
+                    <p>The <strong>CA Dashboard</strong> is useful for owners and accountants as a period health check, but it does not replace professional statutory review:</p>
                     <ul>
                         <li><strong>Net GST Payable:</strong> Tells you exactly how much cash you need to keep in your bank account for the 20th of next month.</li>
                         <li><strong>Tax Distribution Chart:</strong> Shows what percentage of your sales fall under 12% vs 18% GST.</li>
@@ -1273,7 +1354,7 @@
 
                     <div class="scenario-box">
                         <h4>💡 Scenario: QRMP Scheme (Quarterly Filers)</h4>
-                        <p>If your pharmacy has a turnover below Rs. 5 Crore, you might be on the QRMP scheme (Quarterly Return Filing and Monthly Payment). Instead of filing GSTR-1 every month, you only file it every 3 months. However, in Month 1 and 2, you must use the <strong>IFF (Invoice Furnishing Facility)</strong> tab in CredaERP to upload only your B2B sales (sales to clinics) so they can claim ITC. Use the <strong>PMT-06</strong> tab to calculate your monthly challan payment.</p>
+                        <p>Scheme eligibility and the applicable IFF/PMT-06 process depend on current law and the registration profile. Confirm them with the CA/GST portal, then use only the tabs and actions actually visible for your selected period in CredaERP.</p>
                     </div>
                 </section>
 <!-- Migration -->
@@ -1282,7 +1363,7 @@
                     <p>If you are switching from Marg, Retailio, or another software:</p>
                     <ol>
                         <li>Export your medicine master and stock from your old software to Excel/CSV.</li>
-                        <li>Go to <strong>MAINTENANCE &rarr; System Settings &rarr; Bulk Import</strong>.</li>
+                        <li>Use <strong>Inventory &rarr; Inventory List &rarr; Import</strong> for item-master data. Use <strong>Inventory &rarr; 📈 Stock &rarr; Opening Stock / Import</strong> for opening stock batches. Use <strong>System Settings &rarr; Backup &amp; Restore</strong> for approved data exports and portability tools.</li>
                         <li>Upload the CSV file.</li>
                         <li><strong>Important:</strong> The CSV Quantity must be the NET base-unit count (e.g., 750 tablets, not 50 strips).</li>
                         <li>Click Start Import. The migration tool handles Opening Stock safely via <code>OPENING_BALANCE_EQUITY</code> without generating fake Vendor Payables or false GST ITC.</li>
@@ -1296,13 +1377,13 @@
                     
                     <div class="callout success">
                         <div class="callout-header">🛡️ Best Practice: The 3-2-1 Backup Rule</div>
-                        <p>At the end of every day, go to <em>System Settings &rarr; Database &rarr; Create Backup</em>. Save the file to your computer. Then, immediately copy it to a USB Pen Drive (Local Copy) AND upload it to Google Drive (Cloud Copy).</p>
+                        <p>Open <em>System Settings &rarr; Backup &amp; Restore</em> and use the available backup/maintenance controls. Confirm success in the screen or diagnostics before relying on a backup. Store approved copies in protected locations according to your organization’s backup policy.</p>
                     </div>
 
                     <div class="scenario-box">
                         <h4>💡 Scenario: Performing a Database Restore</h4>
-                        <p>If your computer crashes and you buy a new one, install CredaERP, go to Database settings, and click <strong>Restore Backup</strong>. </p>
-                        <p><strong>CRITICAL POST-RESTORE REQUIREMENT:</strong> The restore process drops and replaces every table in the PostgreSQL database in the background. Once the success message appears, the database locks are volatile. You <strong>MUST</strong> close CredaERP completely and restart it. If you attempt to process a sale immediately after clicking Restore without restarting, the application will deadlock.</p>
+                        <p>If your computer crashes and you buy a new one, install CredaERP, go to <strong>System Settings → Backup &amp; Restore</strong>, and click <strong>Restore Database</strong> only after verifying the approved backup and stopping all operators.</p>
+                        <p><strong>CRITICAL POST-RESTORE REQUIREMENT:</strong> Restoring replaces the current database with the selected backup. Follow the completion message; if the application instructs a restart, close CredaERP completely and restart it before processing a sale.</p>
                     </div>
                 </section>
 
@@ -1310,7 +1391,7 @@
                 <!-- Support Diagnostics -->
                 <section id="support-diagnostics">
                     <h2>14. Support & Diagnostics Center</h2>
-                    <p>When something goes wrong—whether it's a slow database, a failing backup, or a strange error—CredaERP provides a built-in diagnostic tool to help the support team fix your issue instantly. You can find this tool in <strong>MAINTENANCE &rarr; System Settings &rarr; Support & Diagnostics</strong>.</p>
+                    <p>When something goes wrong—whether it is a slow database, a failing backup, or a strange error—CredaERP provides a built-in diagnostic tool. Open <strong>MAINTENANCE &rarr; Diagnostics</strong>.</p>
 
                     <h3>Step-by-Step Guide to the Diagnostics Tab</h3>
 
@@ -1334,7 +1415,7 @@
                             <li>Click the blue <strong>Export Support Bundle</strong> button.</li>
                             <li>Save the ZIP file to your Desktop and email it to <code>credaerp@gmail.com</code> or send it via WhatsApp.</li>
                         </ol>
-                        <p><em>Note: The diagnostic output console below the button will show you exactly what is being zipped. It is strictly technical data; no patient or financial data is exposed.</em></p>
+                        <p><em>Note: Review the diagnostic output and selected log range before sharing. Logs/configuration can contain business-sensitive details; never assume that a bundle is safe for public sharing.</em></p>
                     </div>
 
                     <div class="step-card">
@@ -1399,7 +1480,7 @@
                                 <tr><td><strong>System Settings</strong></td><td>MAINTENANCE → System Settings</td><td>Configure company profile, tax, masters, database, printer, backup, user and application settings.</td><td>Change one setting at a time, save, restart only when instructed, and record the old value before changing a production setting.</td></tr>
                                 <tr><td><strong>User Management</strong></td><td>System Settings → User Management</td><td>Create users, assign roles and limit access to sensitive sales, financial, patient and administration functions.</td><td>Use named accounts; never share the administrator password. Remove or disable leavers promptly and review privileged access regularly.</td></tr>
                                 <tr><td><strong>Training Mode</strong></td><td>Top bar → Training Mode</td><td>Practice billing, purchase and workflow steps without confusing training activity with production operations.</td><td>Confirm the visible TRAINING SANDBOX badge before entering test data. Switch back only after clearing or documenting the training work.</td></tr>
-                                <tr><td><strong>Database Settings</strong></td><td>System Settings → Database</td><td>Review connection status, create a backup and perform an authorized restore.</td><td>Backups must be copied away from the computer. A restore is a destructive replacement operation; stop work, verify the backup, and restart the application after restore.</td></tr>
+                                <tr><td><strong>Backup &amp; Restore</strong></td><td>System Settings → Backup &amp; Restore</td><td>Review database size, last/next backup, backup path, schedule, <strong>Backup Now</strong>, and authorized <strong>Restore Database</strong>.</td><td>Backups must be copied away from the computer. A restore replaces the current database; stop work, verify the backup, obtain approval, and follow the application’s restart instruction.</td></tr>
                                 <tr><td><strong>Diagnostics</strong></td><td>MAINTENANCE → Diagnostics</td><td>Check database/backup health and create a support bundle for technical investigation.</td><td>Send the smallest relevant log range. Never publish database passwords, API keys, full patient data or unrestricted database exports in a support message.</td></tr>
                             </tbody>
                         </table>
@@ -1522,10 +1603,10 @@
                     <h3>🌙 Closing the Shop (EOD)</h3>
                     <ul class="checklist">
                         <li>Go to <strong>Day Closure (EOD)</strong>.</li>
-                        <li>Count your physical cash. Compare it to the <em>Expected Cash</em> in the system.</li>
+                        <li>Count your physical cash. Compare it to the <em>System Cash</em> and <em>EXPECTED TOTAL</em> shown in Day Closure.</li>
                         <li>Check your UPI/Card machine settlement totals against the system's UPI/Card totals.</li>
-                        <li>If there is a shortage (e.g., Rs. 50 missing), investigate. If unresolved, record a <em>Cash Shortage Expense</em> to balance the drawer.</li>
-                        <li>Click <strong>Close Day</strong>. This locks the day's invoices so they cannot be tampered with tomorrow.</li>
+                        <li>If there is a shortage or excess, recount, compare the payment evidence, and enter a truthful explanation in the closure notes. Do not create a fake expense or sale to force the drawer to balance.</li>
+                        <li>Click <strong>🔒 Submit Day Closure</strong> and confirm. This is a strict audit event and cannot be edited or rolled back.</li>
                         <li>Generate and save your Daily Backup.</li>
                     </ul>
                     
