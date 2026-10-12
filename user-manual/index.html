@@ -490,6 +490,7 @@
                 <li><a href="#quick-action" class="active">Quick Action Index (Tasks)</a></li>
                 <li><a href="#stuck-support">I’m Stuck — Fix It Now</a></li>
                 <li><a href="#self-service">Onboarding & Self-Service</a></li>
+                <li><a href="#first-run-setup">First-Run Setup &amp; Masters</a></li>
                 <li><a href="#getting-started">Day 1: Setup & Operations</a></li>
                 <li><a href="#sales-billing">Sales & POS Workflows</a></li>
                 <li><a href="#executive-dashboard">Executive Dashboard</a></li>
@@ -806,6 +807,86 @@
                         <li>After a timeout: search Invoice History, Purchase Invoice Register or Return Register before retrying.</li>
                         <li>For a closed period: do not bypass the lock; keep the original reference and obtain accountant/manager approval.</li>
                     </ul>
+                </section>
+
+                <!-- First-run setup and master data -->
+                <section id="first-run-setup">
+                    <h2>First-Run Setup &amp; Master Data</h2>
+                    <p>Complete this sequence once for a new store, and repeat only the relevant step when the business adds a new item, supplier, rack, tax rate or operating rule. The labels below match the application screens.</p>
+
+                    <div class="callout info">
+                        <div class="callout-header">✅ Recommended setup order</div>
+                        <p><strong>License → Business Profile → Users → Printer → Inventory setup masters → Item records → Opening stock → Training transaction → Production sign-off.</strong> Do not load opening stock before the item, unit, tax, batch and selling-price information has been checked.</p>
+                    </div>
+
+                    <h3>1. First launch and license activation</h3>
+                    <ol>
+                        <li>On the <strong>License Activation</strong> screen, record the displayed <strong>Machine ID</strong>. It identifies the installation for which the key was issued.</li>
+                        <li>Paste the supplied key into <strong>Enter your license key below</strong>, then choose <strong>🔑 Activate License</strong>.</li>
+                        <li>Confirm the <strong>Current License</strong> panel shows the correct business name, expiry and license type. Choose <strong>Continue →</strong> only after those values are correct.</li>
+                        <li>On the first branding screen, enter the <strong>Business Name</strong>, choose the correct <strong>Creda Product</strong> and <strong>Business Vertical</strong>, then create the initial administrator with a unique username and strong password. Choose <strong>🚀 Complete Setup</strong>.</li>
+                    </ol>
+                    <div class="callout warning">
+                        <div class="callout-header">🔐 Protect activation and administrator credentials</div>
+                        <p>Never paste a license key or administrator password into a screenshot, public chat or support ticket. If activation fails, send the Machine ID and exact error text to the authorized support channel; do not keep retrying altered keys.</p>
+                    </div>
+
+                    <h3>2. Business, access and output configuration</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Task</th><th>Where to click</th><th>What to enter/check</th><th>Finish when</th></tr></thead>
+                            <tbody>
+                                <tr><td>Business identity</td><td><strong>System Settings → Business Profile</strong></td><td>Basic Information, address, contact details, document prefixes, GST &amp; E-Invoice information, licence/registration fields, bill settings and customer-credit rules.</td><td>Save, then use the invoice/receipt preview to verify the legal name, address, GSTIN and prefixes.</td></tr>
+                                <tr><td>Individual accounts</td><td><strong>System Settings → User Management</strong></td><td>Enter Username, Password, Full Name, Role and Active status. Use the least-privileged role that permits the person’s work.</td><td>Each operator can sign in with their own account. Never share the initial administrator login.</td></tr>
+                                <tr><td>Printing</td><td><strong>System Settings → Printer Settings</strong></td><td>Select Default Printer, Paper Size and Page Orientation. Choose Thermal Printer (Roll) or Standard Printer (A4/Letter); verify logo, GST, licence, doctor, silent-print and Footer settings.</td><td>Choose <strong>Preview Print</strong>, inspect the result, then <strong>Save Configuration</strong>. A failed print is not proof that a sale failed.</td></tr>
+                                <tr><td>Backup baseline</td><td><strong>System Settings → Backup &amp; Restore</strong></td><td>Set a protected Backup Path, review Auto Backup schedule and Backup on Exit, and run <strong>Backup Now</strong>.</td><td>The backup timestamp/path is visible and the owner knows where the approved copy is stored. Do not test Restore on the live database without approval.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>3. Inventory setup masters</h3>
+                    <p>Open <strong>Inventory → ⚙️ Setup</strong>. Create only values that the store actually uses. Every form uses <strong>Save</strong> to commit and <strong>Cancel</strong> to leave without saving.</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Button</th><th>Fields and use</th><th>Important warning</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>📊 Tax Setup</strong></td><td>Tax Name, Percentage, Supply Category and optional Description; select <strong>Set as Default Tax</strong> only for the approved default.</td><td>Use the rate confirmed for the business and item. Never change a tax rate merely to make an old invoice total match.</td></tr>
+                                <tr><td><strong>🏷️ Brand Setup</strong></td><td>Enter Brand Name and optional Description.</td><td>Keep names consistent; duplicate spellings make searches and reports harder to use.</td></tr>
+                                <tr><td><strong>⚖️ Unit Setup</strong></td><td>Enter Unit Code, Unit Name and Symbol. Mark <strong>Loose Unit</strong> and/or <strong>Packing Unit</strong> only when that unit is genuinely used for sale or stock.</td><td>Unit and pack-ratio mistakes change quantities and valuation. Confirm one real pack on the shelf before saving.</td></tr>
+                                <tr><td><strong>Category Setup</strong> / <strong>Sub-Category</strong></td><td>Enter the name and optional description. For a sub-category, choose its <strong>Parent Category</strong> first.</td><td>Create the parent before the child; if the parent is wrong, cancel and correct it instead of creating duplicate branches.</td></tr>
+                                <tr><td><strong>Manufacturer</strong></td><td>Enter Manufacturer Name; optionally add Contact Person, Phone, Email, Address and GST No.</td><td>Use the legal supplier/manufacturer spelling from the source record where reporting or procurement depends on it.</td></tr>
+                                <tr><td><strong>👨‍⚕️ Doctor Setup</strong></td><td>Enter Doctor Name and, when applicable, Specialization, Registration No, Phone, Email, Clinic Name and Address.</td><td>Use the doctor’s registration details only when verified; do not invent a registration number.</td></tr>
+                                <tr><td><strong>🗄️ Rack Setup</strong></td><td>Enter Rack Name (for example RACK-A1), Location and optional Description.</td><td>Use a physical label that staff can find. The rack is a location aid, not a replacement for batch counting.</td></tr>
+                                <tr><td><strong>🕒 Schedule Setup</strong></td><td>Enter Schedule Name (for example H, H1, X or G), Description and select <strong>Prescription Required</strong> when the approved rule requires it.</td><td>Schedule and prescription controls are regulatory settings. Confirm them with the responsible pharmacist/owner.</td></tr>
+                                <tr><td><strong>💊 Item Setup</strong></td><td>Use this to create or maintain the item master; detailed steps are below.</td><td>Do not load stock until the item’s tax, unit, pack ratio and prices have been reviewed.</td></tr>
+                                <tr><td><strong>📄 Content Setup</strong></td><td>Enter the Content Name (Drug Salt), such as Paracetamol or Amoxicillin, and an optional usage/description.</td><td>Record the composition from the product source; this is reference data, not a diagnosis or prescription.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>4. Create an item correctly</h3>
+                    <ol>
+                        <li>Choose <strong>Inventory → ⚙️ Setup → 💊 Item Setup</strong>, then choose <strong>Import Reference Data</strong> for a reviewed bulk file or enter one item manually.</li>
+                        <li>Complete <strong>Basic Information</strong>: Item Name, HSN Code and Generic Salt Name / Composition.</li>
+                        <li>Complete <strong>Categorization &amp; Manufacturer</strong>: Category, Sub-Category (after selecting Category), Manufacturer, Brand, Rack / Storage Location and Barcode / SKU. If Barcode / SKU is blank, the application may generate one on save; verify the generated value.</li>
+                        <li>Complete <strong>Commercials &amp; Safety</strong>: MRP, Sale Rate, Reorder Level, GST / Tax Category and Cess % if applicable. Select <strong>Prescription Required (Schedule H/X)</strong> when appropriate.</li>
+                        <li>Complete <strong>Technical Specifications</strong>: Drug Schedule, Unit, Ratio (Pack Size), Pack Size and Markup %. Enable <strong>Allow Loose Sale</strong> only if the store sells individual units and the ratio is correct.</li>
+                        <li>For a non-pharmacy vertical, use the relevant Color, Size / Fit, Gender, Style / Model and Material fields. For variants, choose <strong>➕ Add Variant</strong> or enter Colors and Sizes under <strong>Matrix Generator</strong>, then choose <strong>⚡ Generate</strong>.</li>
+                        <li>Choose <strong>🏷️ Print Barcode</strong> if labels are needed, then choose <strong>Commit Item Record</strong>. Return to <strong>Inventory List</strong> and search the item to verify the saved values.</li>
+                    </ol>
+                    <div class="callout danger">
+                        <div class="callout-header">⚠️ Do not guess regulated or financial fields</div>
+                        <p>HSN, GST, schedule, prescription requirement, MRP, selling rate, pack ratio and loose-sale behavior affect billing, stock and compliance. If the source label or approved master does not confirm a value, stop and obtain the owner/pharmacist/accountant decision before saving.</p>
+                    </div>
+
+                    <h3>5. Opening stock and go-live rehearsal</h3>
+                    <ol>
+                        <li>Prepare an approved count by item, batch, expiry, quantity, purchase rate, MRP and selling rate.</li>
+                        <li>Open <strong>Inventory → 📈 Stock → Opening Stock / Import</strong>, import or enter the approved sheet, and review rejected rows and totals before committing.</li>
+                        <li>In <strong>Training Mode</strong>, create one sale, test payment and print, search the invoice in history, test a return, and confirm stock movement. Then test a day closure if the store uses it.</li>
+                        <li>After the owner signs off the checklist, switch to Production and verify the environment banner again before the first real sale.</li>
+                    </ol>
+                    <p class="help-result"><strong>Expected result:</strong> staff can sign in individually, find an item, select the correct batch, complete a training sale, locate its history record, and explain how to correct a mistake without creating a fake purchase or sale.</p>
                 </section>
 
                 <!-- Getting Started -->
