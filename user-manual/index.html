@@ -505,6 +505,7 @@
                 <li><a href="#migration">Safe Migration Guide</a></li>
                 <li><a href="#backup-restore">Disaster Recovery</a></li>
                 <li><a href="#support-diagnostics">Support Diagnostics</a></li>
+                <li><a href="#secondary-operations">Secondary Operations</a></li>
                 <li><a href="#technical-reference">Technical Module Directory</a></li>
                 <li><a href="#checklists">Operational Checklists</a></li>
                 <li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
@@ -1513,6 +1514,90 @@
                         <div class="step-number">STEP 4</div>
                         <h4>Remote Assistance (Help Desk)</h4>
                         <p>In the bottom-left corner, the <strong>Help Desk Details</strong> box displays the current support contact details. When instructed, please open <em>AnyDesk</em> or <em>RustDesk</em> on your computer and provide the ID to the support agent so they can securely remote into your system to resolve the issue.</p>
+                    </div>
+                </section>
+
+                <!-- Secondary operational playbooks -->
+                <section id="secondary-operations">
+                    <h2>Secondary Operations: Exact Screen Playbooks</h2>
+                    <p>Use this section for operations that are not performed every day. Start from the exact screen named below, follow the order shown, and check the expected result before closing the screen.</p>
+
+                    <h3>Customers, vendors and settlements</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Operation</th><th>Where to click</th><th>Steps</th><th>Warning / expected result</th></tr></thead>
+                            <tbody>
+                                <tr><td>Register a customer/patient</td><td><strong>Customers → ➕ NEW PATIENT</strong></td><td>Enter Full Name and Mobile Number. Add Legal Name, Email, Consulting Doctor, address, GST Number/State Code, Registration Type and Credit Limit when applicable. Choose <strong>Complete Registration</strong>.</td><td>Search the customer again before billing. Do not create duplicates because a search was slow; use name, phone or ID.</td></tr>
+                                <tr><td>Receive customer credit</td><td><strong>Customers → select customer → 💵 Receive Payment</strong></td><td>Select the customer, review <strong>Outstanding</strong>, optionally select a specific Sales Invoice, enter Payment Date, Payment Amount, Payment Mode and Reference/Notes, then choose <strong>Confirm Receipt</strong>.</td><td>Confirm the receipt number and updated balance. For UPI/card/cheque, retain the external transaction or cheque reference.</td></tr>
+                                <tr><td>Create a supplier</td><td><strong>Vendors → ➕ NEW VENDOR</strong></td><td>Enter Vendor/Company Name, Contact Number and Point of Contact. Add Legal Name, GSTIN, GST State Code, Registration No., address, Opening Balance and Credit Limit only from approved supplier records. Choose <strong>Save Supplier Profile</strong>.</td><td>Opening Balance is a financial value; verify it with the accountant. Do not use it to hide an unpaid invoice that should be entered through Procurement.</td></tr>
+                                <tr><td>Pay a supplier</td><td><strong>Vendors → select vendor → Vendor Payment</strong></td><td>Select the vendor, review Outstanding Balance, optionally choose <strong>Allocate to Invoice</strong>, enter Payment Amount, Payment Date, Payment Mode and Reference/Notes, then choose <strong>✅ Confirm Payment</strong>.</td><td>If no invoice is selected, the screen records an on-account payment. Confirm that this is intentional and retain the bank/transaction reference.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Purchase orders, receiving and supplier corrections</h3>
+                    <ol>
+                        <li>For an identified shortage, open <strong>Inventory → 📈 Stock → Shortage</strong>, add the item and quantity if required, choose <strong>Assign Vendor</strong>, then choose <strong>📋 Process / Place Order</strong>.</li>
+                        <li>Review the order later at <strong>Procurement → Procurement Order Register</strong>. Use <strong>🖨 Print PO</strong> or <strong>💬 Order via WhatsApp</strong> only after checking item, open quantity and suggested vendor.</li>
+                        <li>When goods arrive, choose <strong>📥 Receive Against PO</strong>. Verify the supplier invoice, batch, expiry, quantity, MRP and rate in <strong>Purchase Terminal</strong> before saving the purchase.</li>
+                        <li>For a real supplier invoice not linked to a PO, choose <strong>Procurement → ➕ New Purchase</strong>, select the vendor, enter Invoice Number/Date and payment mode, add each item with batch, expiry, net quantity, MRP, discount, net rate and free quantity, then commit the purchase.</li>
+                        <li>For a discrepancy, shortage or damaged item on a completed purchase, open <strong>Procurement → Purchase Return</strong>, search the original invoice, select only the eligible quantity, enter the reason and choose <strong>Process Return</strong>. For a price/short-shipment claim that is not a physical return, use <strong>Debit Note</strong>, reference the invoice, select the note type, enter the reason, set debit quantities/amounts and choose <strong>📝 Issue Debit Note</strong>.</li>
+                    </ol>
+                    <div class="callout danger">
+                        <div class="callout-header">⚠️ Purchase, return and debit note are different records</div>
+                        <p>A purchase creates inward stock and a supplier liability. A purchase return removes eligible stock. A debit note records an approved supplier deduction for a discrepancy. Do not create a fake purchase, return or journal voucher to make a balance match.</p>
+                    </div>
+                    <p class="help-result"><strong>Verify:</strong> use <strong>Procurement → Procurement Invoice Register</strong>, <strong>Procurement Order Register</strong> or <strong>Procurement Adjustment Register</strong> to confirm the saved document, status, vendor and amount.</p>
+
+                    <h3>Expiry review and disposal/return workflow</h3>
+                    <ol>
+                        <li>For a report, open <strong>Inventory → 📈 Stock → Expiry Register</strong>, choose From/To dates, select <strong>Generate Report</strong>, and review item, batch, manufacturer, expiry, quantity, purchase rate and value. Use <strong>Export to CSV</strong> for an approved review pack.</li>
+                        <li>For action, open <strong>Inventory → 📈 Stock → Expiry Issue</strong>, choose <strong>Refresh Data</strong>, set <strong>Expiring Within</strong>, and select the batches that are physically verified.</li>
+                        <li>For stock returned to a vendor, select Vendor/Supplier, enter the supplier Credit Note / DN Number and Remarks/Notes, then choose <strong>Process Selected Returns</strong>.</li>
+                        <li>Confirm that the selected items were deducted from active stock. Review the Purchase Return/Adjustment Register and retain the supplier document.</li>
+                    </ol>
+                    <div class="callout warning">
+                        <div class="callout-header">Do not process expiry from a report alone</div>
+                        <p>Confirm the physical batch and quantity first. If the vendor did not take the item back, do not enter a supplier return merely to remove it; use the approved Stock Adjustment/disposal process and record the reason.</p>
+                    </div>
+
+                    <h3>Advance orders and sale exchanges</h3>
+                    <ol>
+                        <li>Open <strong>Advance Orders → ＋ New Advance Order</strong>. Search an existing customer or enter the customer name/phone, set Required By Date, add prescription details if relevant, choose <strong>＋ Add Another Medicine</strong> for each item, and record optional Advance Amount, Payment Mode and Notes. Choose <strong>✔ Save Advance Order</strong>.</li>
+                        <li>Monitor the order in <strong>Advance Orders</strong> using <strong>Pending</strong>, <strong>Procurement</strong> and <strong>Ready for Pickup</strong> filters. Search by customer, phone or order number.</li>
+                        <li>For an exchange, open <strong>POS → Sale Exchange</strong>, search the old invoice and choose <strong>🔍 Search</strong>. Move the returned item to <strong>Items Returning</strong>, add replacement items under <strong>New Items (Exchange)</strong>, compare Return Value/New Value/Collect, then choose <strong>Complete Exchange</strong>.</li>
+                    </ol>
+                    <p class="help-result"><strong>Warning:</strong> never exchange against a guessed invoice. Search the original invoice so the batch, quantity and return value are traceable.</p>
+
+                    <h3>E-Invoice / IRN queue</h3>
+                    <ol>
+                        <li>Open <strong>Financials → E-Invoice (IRN)</strong> and choose <strong>🔄 Refresh</strong>.</li>
+                        <li>Search by Invoice No / Customer or filter by IRN Status. Check Invoice No, customer, amount, current status, acknowledgement number and retry count.</li>
+                        <li>For eligible pending records, choose <strong>🚀 Process Queue</strong>. For a failed record, read the status and correct the customer GSTIN, state code, invoice or connection issue first.</li>
+                        <li>Use <strong>🔁 Retry All Failed</strong> only after the cause has been corrected and after checking that an acknowledgement/IRN was not already generated.</li>
+                    </ol>
+                    <div class="callout warning">
+                        <div class="callout-header">IRN safety rule</div>
+                        <p>Never duplicate an invoice or repeatedly retry a successful-looking request. Confirm the existing IRN/acknowledgement and retain the status evidence before taking another action.</p>
+                    </div>
+
+                    <h3>Barcode labels and reference-data imports</h3>
+                    <ul>
+                        <li><strong>One item/batch:</strong> open <strong>Inventory → Inventory List</strong>, choose the item’s barcode action, select the active batch, verify batch number, expiry, MRP/price, label dimensions and copy count, then choose <strong>🖨️ Print Labels</strong> or <strong>💾 Save PDF</strong>. Test one label before printing a batch.</li>
+                        <li><strong>Many items:</strong> choose <strong>Inventory → Print Barcodes</strong>, review selected products and stock, set Print Copies per row, inspect the selected-item preview, then choose <strong>🏷️ Print All</strong> or <strong>Save PDF</strong>.</li>
+                        <li><strong>Medicine/HSN import:</strong> choose <strong>Inventory → Import → Medicine &amp; HSN Master Tools</strong>, select the CSV, map Brand Name (required) and the available Generic Name, HSN Code, Category, Manufacturer, MRP, Pack Size Label, Unit Name and Net Content columns, then choose <strong>Start Import</strong>. For the official directory, select the HSN CSV and choose <strong>Import GST HSN Directory</strong>; review <strong>Auto-Map Missing HSN</strong> suggestions and <strong>Export Pending Review CSV</strong> before accepting unresolved rows.</li>
+                    </ul>
+
+                    <h3>Financial year-end closure</h3>
+                    <ol>
+                        <li>Before starting, complete all Day Closures, held sales, purchases, returns, payments and GST filing work for the period. Take and verify an approved backup.</li>
+                        <li>Open <strong>Maintenance → Financial Year End</strong>, select the Financial Year and verify FY Start Date and FY End Date (Closing Date).</li>
+                        <li>Choose <strong>🔍 Run Pre-flight Audit</strong>. Resolve every <strong>FAIL</strong>, including unclosed shifts, held sales, negative stock batches, expired unsold stock and unfiled GSTR-1 periods.</li>
+                        <li>After accountant/owner approval, choose <strong>🔒 Finalize &amp; Close Financial Year</strong>. Review the Closure History and use Closing Stock Report, Trading Account and GSTR-9 Summary as required.</li>
+                    </ol>
+                    <div class="callout danger">
+                        <div class="callout-header">Year-end is an irreversible control unless authorized reopening is required</div>
+                        <p>Closing locks historical transactions and records an audit event. Do not finalize to bypass an unresolved error. <strong>🔓 Reopen Selected Year</strong> is Admin Only and must be used only with documented approval.</p>
                     </div>
                 </section>
 
