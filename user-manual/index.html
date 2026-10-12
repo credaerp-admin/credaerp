@@ -815,20 +815,20 @@
                     
                     <h3>Day 1: Setup & Initial Balances</h3>
                     <ol>
-                        <li><strong>Pharmacy Profile</strong>: Navigate to <em>System Settings &rarr; Company Profile</em>. Enter your Pharmacy Name, accurate GSTIN, and Registered Address. This data prints on your invoices and GSTR-1 files.</li>
+                        <li><strong>Business Profile</strong>: Navigate to <em>System Settings &rarr; Business Profile</em>. Enter the business name, accurate GSTIN, registered address and licence details. Verify the invoice/receipt preview before production billing.</li>
                         <li><strong>Populate Item Master</strong>: Use <em>Inventory → Inventory List → Import</em> or the applicable bulk-import tool, then verify the imported items before loading stock.</li>
-                        <li><strong>Enter Opening Stock</strong>: Go to <em>Inventory &rarr; Stock Entry</em> to map the physical boxes currently sitting on your shelves.</li>
+                        <li><strong>Enter Opening Stock</strong>: Go to <em>Inventory &rarr; 📈 Stock &rarr; Opening Stock / Import</em> to map the physical boxes currently sitting on your shelves.</li>
                     </ol>
                     
                     <div class="callout danger">
                         <div class="callout-header">⚠️ Critical Constraint: Opening Stock vs. Purchase</div>
                         <p><strong>Never use the "Procurement / Purchase" screen to enter your initial existing shop stock.</strong></p>
-                        <p>Purchases strictly create Vendor Payable ledgers and GST Input Tax Credit (ITC). If you enter old stock as a new purchase, your accounting will show that you owe massive amounts to suppliers, and your GST ITC will be artificially inflated. Always use <em>Stock Entry</em> for initial stock.</p>
+                        <p>A supplier purchase creates stock, vendor payable and purchase/tax records. If you enter old stock as a new purchase, those records will be wrong. Use <em>Opening Stock / Import</em> for existing stock and verify the opening-balance policy with the owner/accountant.</p>
                     </div>
 
                     <div class="scenario-box">
                         <h4>💡 Scenario: I entered Opening Stock, but found a hidden box later</h4>
-                        <p>If the financial year hasn't closed and you haven't filed GST for the month, you can safely go back to <em>Inventory &rarr; Stock Entry</em> and add the missing batch. The system uses a specific equity ledger (OPENING_BALANCE_EQUITY) which will safely absorb the addition without touching vendor accounts.</p>
+                        <p>If a batch is discovered later, do not backdate or enter it as a fake purchase. Open <em>Inventory &rarr; 📈 Stock &rarr; Opening Stock / Import</em>, confirm the correct period and obtain owner/accountant approval before adding it.</p>
                     </div>
                 </section>
 
@@ -1169,7 +1169,7 @@
                         
                         <h5>Key Functionalities:</h5>
                         <ul>
-                            <li><strong>Stock Entry (Opening Stock):</strong> When you first install CredaERP, use this screen to enter the physical stock sitting on your shelves. <strong>Crucial Rule:</strong> Never use Purchase Entry for opening stock, or you will artificially inflate your GST ITC and Vendor Payables.</li>
+                            <li><strong>Opening Stock / Import:</strong> When you first install CredaERP, use <strong>Inventory → 📈 Stock → Opening Stock / Import</strong> for physical stock already on your shelves. <strong>Crucial Rule:</strong> Use Procurement only for a real supplier invoice.</li>
                             <li><strong>Stock Adjustment (Damages/Breakages):</strong> <em>(Real World Example: A staff member drops a glass bottle of syrup on the floor. You cannot return it to the vendor. You go to Stock Adjustment, select the batch, enter quantity 1, set the reason to "Damaged", and save.)</em></li>
                             <li><strong>Financial Impact of Adjustments:</strong> Adjusting stock down safely removes the item from your digital shelf and logs an accounting loss so your Year-End Profit Report remains perfectly accurate.</li>
                         </ul>
@@ -1323,8 +1323,8 @@
                         <h4>Generate & Upload GSTR-1 (Your Sales)</h4>
                         <p>GSTR-1 contains the outward-supply data prepared for the selected period. Confirm the applicable scheme and current due date on the GST portal or with the CA; do not rely on a hard-coded date in this manual.</p>
                         <ol>
-                            <li>In CredaERP, go to <strong>FINANCIALS &rarr; GST Filing &rarr; GSTR-1 Details</strong>.</li>
-                            <li>Select the month and click <strong>Generate GSTR-1</strong>.</li>
+                            <li>In CredaERP, go to <strong>FINANCIALS &rarr; GST Filing</strong>, select the tax period, and open the GSTR-1 workspace/action shown for your build.</li>
+                            <li>Select the tax period, review the GSTR-1 workspace, and use the export action actually shown for that build.</li>
                             <li>Review the summary on the screen. (B2C sales are grouped together, B2B sales are listed invoice-by-invoice).</li>
                             <li>Click <strong>Export JSON</strong>.</li>
                             <li>Log in to the Government GST Portal, go to <em>Returns Dashboard &rarr; GSTR-1 &rarr; Prepare Offline</em>.</li>
@@ -1366,7 +1366,7 @@
                         <li>Use <strong>Inventory &rarr; Inventory List &rarr; Import</strong> for item-master data. Use <strong>Inventory &rarr; 📈 Stock &rarr; Opening Stock / Import</strong> for opening stock batches. Use <strong>System Settings &rarr; Backup &amp; Restore</strong> for approved data exports and portability tools.</li>
                         <li>Upload the CSV file.</li>
                         <li><strong>Important:</strong> The CSV Quantity must be the NET base-unit count (e.g., 750 tablets, not 50 strips).</li>
-                        <li>Click Start Import. The migration tool handles Opening Stock safely via <code>OPENING_BALANCE_EQUITY</code> without generating fake Vendor Payables or false GST ITC.</li>
+                        <li>Click <strong>Start Import</strong>, review the import result, and then verify a sample of items and opening batches in Inventory. Do not use migration import to create a supplier bill or to bypass an accounting-period control.</li>
                     </ol>
                 </section>
 
@@ -1527,6 +1527,23 @@
                         </table>
                     </div>
 
+                    <h3>Secondary operations and connected tools</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Screen / action</th><th>Where to click</th><th>Step-by-step procedure</th><th>Warning / expected result</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Vendor Invoice Scanner &amp; Review Panel</strong></td><td>Procurement → Purchase Entry → <strong>📸 Smart Procurement Scan</strong></td><td>Upload/select the supplier bill, resolve <strong>RESOLVED VENDOR</strong> with <strong>Select/Search Vendor</strong> or <strong>+ Add Vendor</strong>, verify invoice number/date/tax/grand total/payment, then select each extracted item, search/link it with <strong>🔗 Link Product</strong>, correct editable quantity/MRP/rate fields, and click <strong>Commit All Invoices to Stock</strong>.</td><td>OCR is a draft, not proof. Do not commit while an item is <strong>UNRESOLVED</strong> or <strong>Not Linked</strong>. Compare every value with the paper invoice first.</td></tr>
+                                <tr><td><strong>Medicine &amp; HSN Master Tools</strong></td><td>Inventory → import/bulk tools</td><td>Click <strong>Select CSV File</strong>, map Brand Name, Generic Name, HSN Code, Category, Manufacturer, MRP, Pack Size Label, Unit Name and Net Content, then click <strong>Start Import</strong>. For HSN data, use <strong>Select HSN CSV</strong>, review coverage, then choose <strong>Import GST HSN Directory</strong>, <strong>Auto-Map Missing HSN</strong>, or <strong>Export Pending Review CSV</strong>.</td><td>Keep a copy of the source CSV. Review unresolved rows and sample imported items before using them in POS.</td></tr>
+                                <tr><td><strong>Shortage to purchase order</strong></td><td>Inventory → Stock → <strong>Shortage</strong></td><td>Review auto-flagged rows, search a product in <strong>Search product name to add to order...</strong>, enter Qty, click <strong>Add to Order</strong>, assign a vendor in the table, and click <strong>📋 Process / Place Order</strong>.</td><td>Check existing open orders and supplier lead time first. Processing a shortage creates a procurement task; it does not receive stock.</td></tr>
+                                <tr><td><strong>Sale Exchange</strong></td><td>POS Terminal → <strong>EXCHANGE (RETAIL)</strong></td><td>Enter the old invoice in <strong>Search Old Invoice</strong>, click <strong>Search</strong>, move the returned original items with the right arrow, search replacement items under <strong>New Items (Exchange)</strong>, compare Return Value/New Value/Collect, and click <strong>Complete Exchange</strong>.</td><td>Verify old invoice, batch, quantities and the amount to collect before completing. Use Sales Return instead when there is no replacement sale.</td></tr>
+                                <tr><td><strong>Mobile scanner pairing</strong></td><td>POS scanner status → pairing dialog</td><td>Install the CredaERP Scanner app, keep phone and desktop on the same Wi-Fi, use <strong>Auto Discover</strong> or scan the QR, and enter the displayed <strong>PAIRING PIN</strong> if prompted. Use <strong>🔄 New PIN</strong> if the code has expired; use <strong>📋 Copy Info</strong> only through an approved channel.</td><td>The screen must show a connected device. Never expose the pairing PIN, desktop IP/port or QR publicly.</td></tr>
+                                <tr><td><strong>Install mobile app</strong></td><td>MAINTENANCE → <strong>Install Mobile App</strong></td><td>Click <strong>Open Download Link</strong> or <strong>Copy Link</strong>, scan the displayed QR with the Android camera, open the downloaded APK, and allow installation from the source only when Android asks.</td><td>Use the official link shown by CredaERP. After installation, sign in with the assigned account and verify the expected business/environment.</td></tr>
+                                <tr><td><strong>Loyalty Program Configuration</strong></td><td>System Settings → <strong>Loyalty Program</strong></td><td>Enable/disable accrual, enter <strong>Points per Rs. 100 sale</strong>, <strong>Minimum points for redemption</strong>, and <strong>Value per point (Rs.)</strong>, review the program preview, then click <strong>Save Settings</strong>.</td><td>Test the rule in Training Mode before production. In POS, verify points and redemption deduction before saving a sale.</td></tr>
+                                <tr><td><strong>System Audit Trails</strong></td><td>System Settings → <strong>Audit Logs</strong></td><td>Set From Date, To Date, User Account and Action Type, click <strong>🔍 Apply</strong>, review Date &amp; Time/User/Operation/Description/Module, and use <strong>Export CSV</strong> only for an authorized investigation.</td><td>Audit exports can contain sensitive business details. Store them securely and do not alter them.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <h3>Customer, vendor and settlement procedures</h3>
                     <div class="table-wrapper">
                         <table>
@@ -1546,7 +1563,7 @@
                         <table>
                             <thead><tr><th>Master</th><th>Where to click</th><th>Used by</th><th>What breaks when it is wrong</th></tr></thead>
                             <tbody>
-                                <tr><td>Company Profile</td><td>System Settings → Company Profile</td><td>Invoice header, GST identity, address, reports and printouts.</td><td>Wrong legal identity or GST details on documents; correct this before production billing.</td></tr>
+                                <tr><td>Business Profile</td><td>System Settings → Business Profile</td><td>Invoice header, GST identity, address, licence details, reports and printouts.</td><td>Wrong legal identity or GST details on documents; correct this before production billing.</td></tr>
                                 <tr><td>Tax / HSN</td><td>Inventory → Setup → Tax Setup</td><td>Item tax calculation, GST reports and e-invoice eligibility.</td><td>Incorrect tax totals, validation errors or reconciliation differences.</td></tr>
                                 <tr><td>Category / Subcategory / Group</td><td>Inventory → Setup</td><td>Inventory filters, reports, forecasting and item organization.</td><td>Items appear under the wrong filter or analytics group.</td></tr>
                                 <tr><td>Brand / Manufacturer / Generic Content</td><td>Inventory → Setup</td><td>Medicine search, clinical views, supplier comparison and duplicate prevention.</td><td>Search and clinical information becomes incomplete or ambiguous.</td></tr>
@@ -1659,7 +1676,7 @@
                     
                     <div class="faq-item">
                         <h4>A patient wants a custom discount on a specific bill, how do I apply it?</h4>
-                        <p>On the POS screen, beneath the item grid, there is a <em>Bill Discount</em> field. You can enter an absolute amount (e.g., Rs. 50 off) or a percentage (e.g., 5%). The system will automatically prorate this discount across all taxable items to ensure the GST calculations remain mathematically compliant.</p>
+                        <p>On the POS screen, use the visible discount field for the selected bill/line and verify the recalculated taxable value and payable amount before saving. Do not assume a discount field is available for every role or item type.</p>
                     </div>
                 </section>
 
