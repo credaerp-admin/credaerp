@@ -437,4 +437,103 @@ document.addEventListener('DOMContentLoaded', () => {
         goTo(0);
         startAuto();
     }
+
+    // ================= Dynamic YouTube Playlist Showcase =================
+    const videoGrid = document.getElementById('video-grid');
+    const mainYtFrame = document.getElementById('main-yt-frame');
+    const featuredPlayer = document.getElementById('featured-video-player');
+
+    if (videoGrid && mainYtFrame) {
+        const playlistId = videoGrid.dataset.playlist || 'PLNe_ICSHlhmI';
+        const rssFeedUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+
+        fetch(apiUrl)
+            .then(res => {
+                if (!res.ok) throw new Error('Network response was not ok');
+                return res.json();
+            })
+            .then(data => {
+                if (!data || !data.items || data.items.length === 0) {
+                    videoGrid.innerHTML = `
+                        <div class="video-loading-placeholder" style="border-style: solid;">
+                            <p>All videos from this playlist are ready to watch in the main player above.</p>
+                            <a href="https://www.youtube.com/playlist?list=${playlistId}" target="_blank" rel="noopener noreferrer" class="view-all-link">
+                                Watch on YouTube ↗
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                videoGrid.innerHTML = ''; // Clear placeholder
+
+                data.items.slice(0, 6).forEach((item, index) => {
+                    // Extract YouTube video ID
+                    let videoId = '';
+                    if (item.guid && item.guid.includes('video:')) {
+                        videoId = item.guid.split('video:')[1];
+                    } else if (item.link && item.link.includes('v=')) {
+                        videoId = item.link.split('v=')[1].split('&')[0];
+                    }
+
+                    const thumbUrl = item.thumbnail || (videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : 'images/logo.jpg');
+                    const pubDate = item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+                    const card = document.createElement('article');
+                    card.className = 'video-card' + (index === 0 ? ' active-playing' : '');
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('aria-label', `Play video: ${item.title}`);
+
+                    card.innerHTML = `
+                        <div class="video-card-thumb">
+                            <img src="${thumbUrl}" alt="${item.title}" loading="lazy" />
+                            <div class="video-play-badge">
+                                <span class="play-triangle">▶</span>
+                            </div>
+                        </div>
+                        <div class="video-card-body">
+                            <h4 class="video-card-title">${item.title}</h4>
+                            <div class="video-card-meta">
+                                <span>📺 CredaERP Demo</span>
+                                ${pubDate ? `<span>• ${pubDate}</span>` : ''}
+                            </div>
+                        </div>
+                    `;
+
+                    const playVideo = () => {
+                        if (videoId) {
+                            mainYtFrame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+                            document.querySelectorAll('.video-card').forEach(c => c.classList.remove('active-playing'));
+                            card.classList.add('active-playing');
+                            if (featuredPlayer) {
+                                featuredPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        }
+                    };
+
+                    card.addEventListener('click', playVideo);
+                    card.addEventListener('keydown', e => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            playVideo();
+                        }
+                    });
+
+                    videoGrid.appendChild(card);
+                });
+            })
+            .catch(() => {
+                // Graceful fallback: Main playlist series player is still active
+                videoGrid.innerHTML = `
+                    <div class="video-loading-placeholder" style="border-style: solid;">
+                        <p>Browse all videos directly inside the playlist player above, or visit the playlist on YouTube.</p>
+                        <a href="https://www.youtube.com/playlist?list=${playlistId}" target="_blank" rel="noopener noreferrer" class="view-all-link">
+                            Open CredaERP Playlist on YouTube ↗
+                        </a>
+                    </div>
+                `;
+            });
+    }
 });

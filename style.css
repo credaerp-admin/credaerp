@@ -1705,6 +1705,244 @@ footer {
 .mobile-download-note p { color: var(--text-secondary); font-size: .8rem; line-height: 1.5; }
 .mobile-download-note .cta-btn { margin-left: auto; flex: 0 0 auto; padding: .65rem 1rem; font-size: .8rem; }
 
+/* ================= Live Video Tutorials Section ================= */
+.video-tutorials-section {
+    padding: 3rem 0 6rem 0;
+}
+
+.tutorials-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.tutorials-header .section-subtitle {
+    margin-bottom: 0;
+}
+
+.video-player-container {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(37, 99, 235, 0.1);
+    max-width: 1040px;
+    margin: 0 auto 3rem auto;
+}
+
+.video-player-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.featured-player-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.featured-player-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.video-grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1040px;
+    margin: 0 auto 1.5rem auto;
+    padding: 0 0.5rem;
+}
+
+.video-grid-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.view-all-link {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.view-all-link:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1040px;
+    margin: 0 auto 3rem auto;
+}
+
+.video-loading-placeholder {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: 16px;
+    color: var(--text-secondary);
+}
+
+.video-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.video-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-color-active);
+    box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(37, 99, 235, 0.15);
+}
+
+.video-card.active-playing {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.video-card-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #090d16;
+    overflow: hidden;
+}
+
+.video-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.video-card:hover .video-card-thumb img {
+    transform: scale(1.04);
+}
+
+.video-play-badge {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11, 17, 32, 0.4);
+    transition: background 0.3s ease;
+}
+
+.video-card:hover .video-play-badge {
+    background: rgba(37, 99, 235, 0.3);
+}
+
+.play-triangle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.video-card:hover .play-triangle {
+    transform: scale(1.1);
+    background: #dc2626;
+}
+
+.video-card-body {
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.video-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.video-card-meta {
+    margin-top: auto;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Video CTA Card */
+.video-cta-card {
+    max-width: 1040px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 18px;
+    padding: 2.25rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+}
+
+.video-cta-badge {
+    display: inline-block;
+    color: #93c5fd;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.35rem;
+}
+
+.video-cta-content h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.35rem;
+}
+
+.video-cta-content p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+}
+
+.video-cta-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
     .container { padding-top: 5.25rem; }
     .nav-container { padding: .75rem 1rem; }
@@ -1722,6 +1960,11 @@ footer {
     .hero-ctas { flex-direction: column; align-items: stretch; }
     .hero-proof-row { gap: .5rem .9rem; }
     .audience-strip { border-radius: 18px; }
+    .video-tutorials-section { padding: 2rem 0 4rem 0; }
+    .video-grid { grid-template-columns: 1fr; }
+    .video-cta-card { flex-direction: column; text-align: center; padding: 1.75rem 1.25rem; }
+    .video-cta-actions { flex-direction: column; width: 100%; }
+    .video-cta-actions .cta-btn { width: 100%; text-align: center; }
     .journey-grid { grid-template-columns: 1fr; }
     .journey-card { min-height: auto; }
     .journey-card h3 { margin-top: 1.25rem; }
