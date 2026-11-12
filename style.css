@@ -1615,23 +1615,128 @@ footer {
 .pricing-value-note strong { color: #fff; }
 .renewal-promise {
     display: grid;
-    grid-template-columns: 1.2fr .8fr;
-    gap: 2rem;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 2.5rem;
     align-items: center;
-    margin: 1rem auto 0;
-    max-width: 1000px;
-    padding: 2rem;
-    border: 1px solid rgba(96, 165, 250, .25);
-    border-radius: 22px;
-    background: linear-gradient(135deg, rgba(37, 99, 235, .12), rgba(34, 197, 94, .06));
+    margin: 1.5rem auto 0;
+    max-width: 1100px;
+    padding: 2.5rem 2.5rem;
+    border: 1px solid rgba(96, 165, 250, .3);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%);
+    box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(37, 99, 235, 0.1);
 }
-.renewal-promise .section-kicker { text-align: left; margin-bottom: .5rem; }
-.renewal-promise h3 { font-size: 1.45rem; margin-bottom: .5rem; }
-.renewal-promise p:not(.section-kicker) { color: var(--text-secondary); font-size: .92rem; margin-bottom: 0; }
-.renewal-points { display: grid; gap: .7rem; }
-.renewal-points span { color: var(--text-secondary); font-size: .86rem; }
-.renewal-points b { color: #93c5fd; margin-right: .5rem; }
-.renewal-points small { color: #bfdbfe; font-size: .76rem; line-height: 1.4; }
+.renewal-promise .section-kicker { text-align: left; margin-bottom: .5rem; color: #93c5fd; }
+.renewal-promise h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: .65rem; color: #fff; }
+.renewal-promise p:not(.section-kicker) { color: var(--text-secondary); font-size: .92rem; line-height: 1.55; margin-bottom: 1rem; }
+.renewal-perks { display: flex; flex-direction: column; gap: 0.45rem; }
+.renewal-perks span { color: #cbd5e1; font-size: 0.82rem; font-weight: 500; }
+
+/* AMC Panel Styling */
+.renewal-amc-panel {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 1.5rem 1.35rem;
+}
+.amc-panel-header {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+.amc-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 999px;
+    color: #6ee7b7;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+.amc-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.15rem;
+}
+.amc-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+.amc-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+.amc-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+.amc-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(96, 165, 250, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+.amc-card.featured {
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+.amc-card-tag {
+    position: absolute;
+    top: -9px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+.amc-plan-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+}
+.amc-price {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #6ee7b7;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+}
+.amc-card.featured .amc-price {
+    color: #93c5fd;
+}
+.amc-price span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+.amc-save-pill {
+    display: inline-block;
+    padding: 0.18rem 0.45rem;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 999px;
+    color: #86efac;
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
 .pricing-section::before {
     content: none;
 }
@@ -2484,7 +2589,8 @@ footer {
     .mobile-download-note { align-items: flex-start; flex-wrap: wrap; }
     .mobile-download-note .cta-btn { margin-left: 0; width: 100%; text-align: center; }
     .pricing-card.popular { transform: none; }
-    .renewal-promise { grid-template-columns: 1fr; padding: 1.5rem; }
+    .renewal-promise { grid-template-columns: 1fr; padding: 1.5rem; gap: 1.5rem; }
+    .amc-cards-row { grid-template-columns: 1fr; gap: 0.65rem; }
     .calculator-section { padding: 3rem 0 2rem; }
     .calc-card { grid-template-columns: 1fr; padding: 1.5rem; gap: 1.5rem; }
     .calc-metric-banner { grid-template-columns: 1fr; }
