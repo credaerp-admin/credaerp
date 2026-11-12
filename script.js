@@ -239,12 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Pricing Toggle Logic (INR only — for Indian businesses) ──────────
     const PRICES = {
-        quarterly: { starter: 1199, growth: 1699, premium: 2399 },
-        yearly:    { starter: 3499, growth: 4999, premium: 6999 }
+        quarterly: { starter: 1699, growth: 2999, premium: 3499 },
+        yearly:    { starter: 4999, growth: 8999, premium: 9999 }
     };
 
     // Strikethrough shown on yearly tab = what 4 quarters would cost
-    const ORIGINALS_YEARLY = { starter: 4796, growth: 6796, premium: 9596 };
+    const ORIGINALS_YEARLY = { starter: 6796, growth: 11996, premium: 13996 };
 
     const PERIOD_LABELS = { quarterly: '/ quarter', yearly: '/ year' };
     const PLANS = ['starter', 'growth', 'premium'];
