@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "downloadUrlWindows": "https://github.com/credaerp-admin/medicines-catalog/releases/latest/download/CredaERP-Windows.exe",
   "downloadUrlMacIntel": "https://github.com/credaerp-admin/medicines-catalog/releases/latest/download/CredaERP-macOS-Intel.dmg",
   "downloadUrlMacSilicon": "https://github.com/credaerp-admin/medicines-catalog/releases/latest/download/CredaERP-macOS-AppleSilicon.dmg",
