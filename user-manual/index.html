@@ -459,6 +459,20 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Hide Netlify injected badge / HUD iframe */
+        iframe#nl-badge-frame,
+        iframe#nl-hud-frame,
+        iframe[src*="netlify"],
+        iframe[title*="Netlify"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            clip-path: path("M0 0Z") !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
     </style>
 </head>
 <body>
