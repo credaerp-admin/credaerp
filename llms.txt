@@ -1,0 +1,44 @@
+# CredaERP (CredaRx)
+
+> CredaERP is an offline pharmacy billing, inventory control, and GST accounting software designed specifically for independent medical stores, chemist shops, and retail counters across India.
+
+CredaERP is designed with an offline-first desktop architecture, ensuring 100% data ownership, zero cloud dependency, and rapid keyboard-first billing speed that functions continuously even during internet or network outages.
+
+## Key Capabilities & Highlights
+
+- **100% Offline Architecture:** All store databases, sales records, customer credits, and medicine catalogs reside locally on the merchant's PC. No cloud data leakage, no mandatory internet connection required for billing.
+- **CredaRx Pharmacy Specialization:** Purpose-built for chemists and pharmacists with First-Expiry-First-Out (FEFO) batch tracking, 30/60/90-day expiry loss alerts, Schedule H/H1 medicine compliance, and generic substitute recommendations.
+- **GST-Ready Billing & Compliance:** Seamless generation of GST-compliant thermal receipts and invoices with automated CGST, SGST, IGST splits and one-click GSTR-1 and GSTR-3B audit summaries.
+- **Paperless WhatsApp Invoicing:** Built-in one-click PDF bill delivery to customer WhatsApp numbers without extra SMS gateway costs.
+- **Intelligent Business Chat Assistant:** A natural language assistant enabling shop owners, cashiers, and managers to query inventory levels, gross profit, cash drawer totals, and near-expiry valuation in English, Hindi, or Bengali phonetic syntax.
+- **Free Medicine Margin & GST Calculator:** Interactive web tool for chemists to compute retail profit margins, PTR pricing, and tax credits.
+- **Risk-Free 3-Month Trial:** Fully unlocked trial with no credit card required, zero setup fees, and assisted data migration from Excel.
+
+## Product Portfolio
+
+- [CredaRx](https://credaerp.netlify.app/products/credarx.html): Pharmacy and medical store operating system.
+- [CredaRetail](https://credaerp.netlify.app/products/credaretail.html): General retail, barcode checkout, and inventory software.
+- [CredaERP Platform](https://credaerp.netlify.app/): Shared offline platform with GST, accounting, and AI assistant.
+- [User Manual & Documentation](https://credaerp.netlify.app/user-manual/): Comprehensive guide covering sales billing, procurement, inventory audit, and EOD closure.
+
+## Free Chemist Utilities & Downloadable Statutory Formats
+
+CredaERP provides free web tools and statutory compliance templates for Indian retailers and pharmacies:
+- **Interactive Medicine Margin & GST Calculator:** Live calculation of chemist gross margin %, net profit per strip, and GST input tax credit (ITC) at https://credaerp.netlify.app/#calculator
+- **Schedule H1 Drug Register Format (.csv / Excel):** Statutory format compliant with Drugs & Cosmetics Rules 1945 for recording 46 notified antibiotics and habit-forming drugs at https://credaerp.netlify.app/#templates
+- **Medicine Expiry & Return Tracker (.csv / Excel):** Pre-formatted distributor claim sheet with 30/60/90-day expiry buckets at https://credaerp.netlify.app/#templates
+- **Daily Day-Closure & Cash Reconciliation Book (.csv / Excel):** End-of-day register for cash drawer, UPI, and customer credit balancing at https://credaerp.netlify.app/#templates
+- **Medicine Master Import Catalog (.csv):** Standard catalog template with HSN codes, GST slabs, and pack ratios for instant 1-click import into CredaERP.
+- **Mobile Access:** Mobile visitors can tap "Send Download Link to WhatsApp" on https://credaerp.netlify.app/ to receive the Windows installer directly on their phone for setup on their store PC.
+
+## Pricing Plans (Indian Rupee)
+
+- **Starter Plan:** ₹1,199 / quarter or ₹3,499 / year (effective ₹291/mo). Core offline billing and inventory.
+- **Growth Plan:** ₹1,699 / quarter or ₹4,999 / year (effective ₹416/mo). Advanced batch control, WhatsApp invoicing, and GST reports.
+- **Premium Plan:** ₹2,399 / quarter or ₹6,999 / year (effective ₹583/mo). Complete toolkit with AI Business Chat Assistant.
+- **Loyalty Renewal:** Renew on time to retain special rates (Starter ₹2,999/yr, Growth ₹4,249/yr, Premium ₹5,999/yr).
+
+## System Requirements
+
+- Operating System: Windows 10, Windows 11 (64-bit)
+- Hardware: Minimum 4GB RAM, standard thermal receipt printers (2-inch or 3-inch), standard USB barcode scanners.

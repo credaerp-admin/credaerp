@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# OpenAI / ChatGPT Crawlers (SearchGPT & ChatGPT Search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Perplexity AI Crawlers
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude Crawlers
+User-agent: ClaudeBot
+Allow: /
+
+# Google Gemini / AI Search Crawlers
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Copilot / Bing Crawlers
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://credaerp.netlify.app/sitemap.xml

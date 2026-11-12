@@ -13,7 +13,7 @@ Use product-specific landing pages and sales collateral, while keeping accountin
 
 **Positioning:** Fast, reliable pharmacy billing and inventory control for Indian medical stores.
 
-**Ideal customer:** Independent pharmacies and small chains with one to three counters moving beyond Excel, manual registers, Marg, or difficult-to-train software.
+**Ideal customer:** Independent pharmacies and small chains with one to three counters moving beyond Excel, manual registers, or difficult-to-train legacy software.
 
 **Demo flow:** Set up catalog → bill a medicine → record a cash/credit split → show batch and expiry → review customer credit → close the day → export GST/reporting output.
 
