@@ -438,266 +438,180 @@ document.addEventListener('DOMContentLoaded', () => {
         startAuto();
     }
 
-    // ================= CredaERP Learning Academy (100+ Video Lessons) =================
-    const videoGrid = document.getElementById('video-grid');
+    // ================= CredaERP Video Tutorials Carousel (Real YouTube Lessons) =================
+    const videoTrack = document.getElementById('video-carousel-track');
+    const videoPrevBtn = document.getElementById('video-carousel-prev');
+    const videoNextBtn = document.getElementById('video-carousel-next');
+    const videoDotsWrap = document.getElementById('video-carousel-dots');
     const mainYtFrame = document.getElementById('main-yt-frame');
     const featuredPlayer = document.getElementById('featured-video-player');
-    const searchInput = document.getElementById('video-search-input');
-    const categoryTabs = document.getElementById('video-category-tabs');
-    const resultsCount = document.getElementById('video-results-count');
 
-    if (videoGrid && mainYtFrame) {
-        const playlistId = videoGrid.dataset.playlist || 'PLNe_ICSHlhmI';
-
-        // Curated Academy Library with 100+ topic coverage
-        const ACADEMY_LIBRARY = [
+    if (videoTrack && mainYtFrame) {
+        // Real videos from CredaERP playlist (PLNe_ICSHlhmI)
+        const REAL_VIDEOS = [
             {
-                id: 'out-of-stock-billing',
-                videoId: 'fR-gJ6yq4c4',
+                videoId: '3Tk0SBdrxf4',
                 title: 'Out-of-Stock दवा आने पर ऐसे करें Billing (बिना दोबारा Entry किए)',
-                category: 'billing',
                 categoryLabel: 'Fast Billing & POS',
                 duration: '4:15 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/fR-gJ6yq4c4/hqdefault.jpg'
+                language: 'Hindi',
+                thumb: 'https://img.youtube.com/vi/3Tk0SBdrxf4/mqdefault.jpg'
             },
             {
-                id: 'advance-order-medicine',
-                videoId: '9W9qXg4l_M0',
-                title: 'Stock में दवा नहीं है? 🔴 फिर भी Sale कन्फर्म करें! | CredaRx Advance Order',
-                category: 'orders',
+                videoId: 'uS6Q4ElFaX8',
+                title: 'Stock में दवा नहीं है? 🛑 फिर भी Sale कंफर्म करें! | CredaRx Advance Order',
                 categoryLabel: 'Advance Orders',
                 duration: '3:50 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/9W9qXg4l_M0/hqdefault.jpg'
+                language: 'Hindi',
+                thumb: 'https://img.youtube.com/vi/uS6Q4ElFaX8/mqdefault.jpg'
             },
             {
-                id: 'ai-chat-assistant',
-                videoId: 'k_5W2mXl9Ps',
+                videoId: 'Xl0pC73kuw0',
                 title: 'Medical Store में AI का कमाल! 🤖 CredaRx AI Chat Assistant Live Demo',
-                category: 'ai',
                 categoryLabel: 'AI Business Chat',
                 duration: '5:10 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/k_5W2mXl9Ps/hqdefault.jpg'
+                language: 'Hindi',
+                thumb: 'https://img.youtube.com/vi/Xl0pC73kuw0/mqdefault.jpg'
             },
             {
-                id: 'profit-loss-tracking',
-                videoId: 'dF8Q1yG0T_g',
+                videoId: 'CNvAMWg0Tnc',
                 title: 'Medical Store का Profit & Loss ऐसे Track करें 📊 CredaRx Gross Margin',
-                category: 'gst',
-                categoryLabel: 'GST & Audit Reports',
+                categoryLabel: 'GST & Profit Reports',
                 duration: '4:45 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/dF8Q1yG0T_g/hqdefault.jpg'
+                language: 'Hindi',
+                thumb: 'https://img.youtube.com/vi/CNvAMWg0Tnc/mqdefault.jpg'
             },
             {
-                id: 'speed-billing-counter',
-                videoId: '7z1vKpQm4x8',
+                videoId: 'capC6oDGJ_Y',
                 title: 'Medical Store पर इतनी तेज़ Billing कभी देखी है? ⚡ CredaRx 3-Sec Checkout',
-                category: 'billing',
-                categoryLabel: 'Fast Billing & POS',
+                categoryLabel: 'Rapid POS Checkout',
                 duration: '3:30 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/7z1vKpQm4x8/hqdefault.jpg'
-            },
-            {
-                id: 'batch-expiry-management',
-                videoId: '3aB8xQeLm1Y',
-                title: 'Batch & Expiry Date Management: Never Lose Money on Expired Medicines',
-                category: 'inventory',
-                categoryLabel: 'Inventory & Expiry',
-                duration: '5:40 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/3aB8xQeLm1Y/hqdefault.jpg'
-            },
-            {
-                id: 'gst-gstr1-3b-filing',
-                videoId: '8cN9vPtX4o0',
-                title: '1-Click GSTR-1 and GSTR-3B Tax Report Generation for Chemists',
-                category: 'gst',
-                categoryLabel: 'GST & Audit Reports',
-                duration: '6:15 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/8cN9vPtX4o0/hqdefault.jpg'
-            },
-            {
-                id: 'whatsapp-digital-invoice',
-                videoId: '5mK2pQwR9tL',
-                title: 'Send Automatic WhatsApp Bills & Payment Links to Customers with 0 Paper',
-                category: 'billing',
-                categoryLabel: 'Fast Billing & POS',
-                duration: '3:10 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/5mK2pQwR9tL/hqdefault.jpg'
-            },
-            {
-                id: 'purchase-grn-smart-scan',
-                videoId: '2pL9qRtV4wX',
-                title: 'Smart Procurement Scan: Vendor Bill to Inventory in Under 60 Seconds',
-                category: 'inventory',
-                categoryLabel: 'Inventory & Expiry',
-                duration: '4:55 min',
-                language: 'Hindi & English',
-                thumb: 'https://i.ytimg.com/vi/2pL9qRtV4wX/hqdefault.jpg'
+                language: 'Hindi',
+                thumb: 'https://img.youtube.com/vi/capC6oDGJ_Y/mqdefault.jpg'
             }
         ];
 
-        let currentCategory = 'all';
-        let currentSearchQuery = '';
-        let activePlayingId = ACADEMY_LIBRARY[0].videoId;
+        let activePlayingId = REAL_VIDEOS[0].videoId;
+        let videoCurrentIndex = 0;
 
-        function renderVideos() {
-            const filtered = ACADEMY_LIBRARY.filter(video => {
-                const matchCategory = currentCategory === 'all' || video.category === currentCategory;
-                const matchSearch = !currentSearchQuery || 
-                    video.title.toLowerCase().includes(currentSearchQuery) || 
-                    video.categoryLabel.toLowerCase().includes(currentSearchQuery);
-                return matchCategory && matchSearch;
-            });
+        function getVisibleCards() {
+            if (window.innerWidth <= 768) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 3;
+        }
 
-            if (resultsCount) {
-                resultsCount.textContent = `Showing ${filtered.length} lesson${filtered.length === 1 ? '' : 's'} · Full 100+ video library available on YouTube`;
+        function maxVideoIndex() {
+            return Math.max(0, REAL_VIDEOS.length - getVisibleCards());
+        }
+
+        function buildVideoDots() {
+            if (!videoDotsWrap) return;
+            videoDotsWrap.innerHTML = '';
+            const totalDots = maxVideoIndex() + 1;
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === videoCurrentIndex ? ' active' : '');
+                dot.setAttribute('aria-label', `Go to video slide ${i + 1}`);
+                dot.addEventListener('click', () => goToVideoSlide(i));
+                videoDotsWrap.appendChild(dot);
             }
+        }
 
-            if (filtered.length === 0) {
-                videoGrid.innerHTML = `
-                    <div class="video-loading-placeholder" style="border-style: solid;">
-                        <p>No video lessons found matching "${currentSearchQuery}".</p>
-                        <button class="category-pill active" id="reset-video-search-btn" style="margin-top: 0.5rem;">Reset Filters</button>
+        function updateVideoDots() {
+            if (!videoDotsWrap) return;
+            videoDotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === videoCurrentIndex);
+            });
+        }
+
+        function moveVideoTrack() {
+            const card = videoTrack.querySelector('.video-card');
+            if (!card) return;
+            const gap = 24; // 1.5rem in px
+            const cardWidth = card.offsetWidth;
+            const offset = videoCurrentIndex * (cardWidth + gap);
+            videoTrack.style.transform = `translateX(-${offset}px)`;
+
+            if (videoPrevBtn) videoPrevBtn.disabled = videoCurrentIndex === 0;
+            if (videoNextBtn) videoNextBtn.disabled = videoCurrentIndex >= maxVideoIndex();
+            updateVideoDots();
+        }
+
+        function goToVideoSlide(idx) {
+            videoCurrentIndex = Math.max(0, Math.min(idx, maxVideoIndex()));
+            moveVideoTrack();
+        }
+
+        // Render video cards
+        videoTrack.innerHTML = '';
+        REAL_VIDEOS.forEach((video, idx) => {
+            const card = document.createElement('article');
+            card.className = 'video-card' + (video.videoId === activePlayingId ? ' active-playing' : '');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Play video: ${video.title}`);
+
+            card.innerHTML = `
+                <div class="video-card-thumb">
+                    <img src="${video.thumb}" alt="${video.title}" loading="lazy" />
+                    <div class="video-play-badge">
+                        <span class="play-triangle">▶</span>
                     </div>
-                `;
-                const resetBtn = document.getElementById('reset-video-search-btn');
-                if (resetBtn) {
-                    resetBtn.addEventListener('click', () => {
-                        currentCategory = 'all';
-                        currentSearchQuery = '';
-                        if (searchInput) searchInput.value = '';
-                        if (categoryTabs) {
-                            categoryTabs.querySelectorAll('.category-pill').forEach(b => b.classList.remove('active'));
-                            const allTab = categoryTabs.querySelector('[data-category="all"]');
-                            if (allTab) allTab.classList.add('active');
-                        }
-                        renderVideos();
-                    });
+                    <span class="video-duration-pill">${video.duration}</span>
+                </div>
+                <div class="video-card-body">
+                    <span class="video-tag-pill">${video.categoryLabel}</span>
+                    <h4 class="video-card-title">${video.title}</h4>
+                    <div class="video-card-meta">
+                        <span>📺 CredaRx Guide</span>
+                        <span>• ${video.language}</span>
+                    </div>
+                </div>
+            `;
+
+            const playVideo = () => {
+                activePlayingId = video.videoId;
+                mainYtFrame.src = `https://www.youtube-nocookie.com/embed/${video.videoId}?autoplay=1`;
+                document.querySelectorAll('.video-card').forEach(c => c.classList.remove('active-playing'));
+                card.classList.add('active-playing');
+                if (featuredPlayer) {
+                    featuredPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-                return;
+            };
+
+            card.addEventListener('click', playVideo);
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    playVideo();
+                }
+            });
+
+            videoTrack.appendChild(card);
+        });
+
+        if (videoPrevBtn) {
+            videoPrevBtn.addEventListener('click', () => {
+                goToVideoSlide(videoCurrentIndex - 1);
+            });
+        }
+
+        if (videoNextBtn) {
+            videoNextBtn.addEventListener('click', () => {
+                goToVideoSlide(videoCurrentIndex + 1);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (videoCurrentIndex > maxVideoIndex()) {
+                videoCurrentIndex = maxVideoIndex();
             }
+            buildVideoDots();
+            moveVideoTrack();
+        });
 
-            videoGrid.innerHTML = '';
-            filtered.forEach(video => {
-                const card = document.createElement('article');
-                card.className = 'video-card' + (video.videoId === activePlayingId ? ' active-playing' : '');
-                card.setAttribute('tabindex', '0');
-                card.setAttribute('role', 'button');
-                card.setAttribute('aria-label', `Play video: ${video.title}`);
-
-                card.innerHTML = `
-                    <div class="video-card-thumb">
-                        <img src="${video.thumb}" alt="${video.title}" loading="lazy" onerror="this.src='images/dashboard-analytics.png';" />
-                        <div class="video-play-badge">
-                            <span class="play-triangle">▶</span>
-                        </div>
-                        <span class="video-duration-pill">${video.duration}</span>
-                    </div>
-                    <div class="video-card-body">
-                        <span class="video-tag-pill">${video.categoryLabel}</span>
-                        <h4 class="video-card-title">${video.title}</h4>
-                        <div class="video-card-meta">
-                            <span>📺 Creda Academy</span>
-                            <span>• ${video.language}</span>
-                        </div>
-                    </div>
-                `;
-
-                const playVideo = () => {
-                    activePlayingId = video.videoId;
-                    mainYtFrame.src = `https://www.youtube-nocookie.com/embed/${video.videoId}?autoplay=1`;
-                    document.querySelectorAll('.video-card').forEach(c => c.classList.remove('active-playing'));
-                    card.classList.add('active-playing');
-                    if (featuredPlayer) {
-                        featuredPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                };
-
-                card.addEventListener('click', playVideo);
-                card.addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        playVideo();
-                    }
-                });
-
-                videoGrid.appendChild(card);
-            });
-        }
-
-        // Category filter click
-        if (categoryTabs) {
-            categoryTabs.querySelectorAll('.category-pill').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    categoryTabs.querySelectorAll('.category-pill').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentCategory = btn.dataset.category || 'all';
-                    renderVideos();
-                });
-            });
-        }
-
-        // Search input
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                currentSearchQuery = e.target.value.trim().toLowerCase();
-                renderVideos();
-            });
-        }
-
-        // Try syncing extra live items from YouTube RSS feed without breaking curated library
-        const rssFeedUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-
-        fetch(apiUrl)
-            .then(res => res.ok ? res.json() : null)
-            .then(data => {
-                if (data && data.items && data.items.length > 0) {
-                    data.items.forEach(item => {
-                        let videoId = '';
-                        if (item.guid && item.guid.includes('video:')) {
-                            videoId = item.guid.split('video:')[1];
-                        } else if (item.link && item.link.includes('v=')) {
-                            videoId = item.link.split('v=')[1].split('&')[0];
-                        }
-
-                        if (videoId && !ACADEMY_LIBRARY.some(v => v.videoId === videoId)) {
-                            const titleLower = item.title.toLowerCase();
-                            let cat = 'billing';
-                            let catLabel = 'Fast Billing & POS';
-                            if (titleLower.includes('order')) { cat = 'orders'; catLabel = 'Advance Orders'; }
-                            else if (titleLower.includes('stock') || titleLower.includes('expiry') || titleLower.includes('batch')) { cat = 'inventory'; catLabel = 'Inventory & Expiry'; }
-                            else if (titleLower.includes('gst') || titleLower.includes('profit') || titleLower.includes('report')) { cat = 'gst'; catLabel = 'GST & Audit Reports'; }
-                            else if (titleLower.includes('ai') || titleLower.includes('chat') || titleLower.includes('assistant')) { cat = 'ai'; catLabel = 'AI Business Chat'; }
-
-                            ACADEMY_LIBRARY.push({
-                                id: videoId,
-                                videoId: videoId,
-                                title: item.title,
-                                category: cat,
-                                categoryLabel: catLabel,
-                                duration: '4:00 min',
-                                language: 'Hindi & English',
-                                thumb: item.thumbnail || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
-                            });
-                        }
-                    });
-                    renderVideos();
-                }
-            })
-            .catch(() => {
-                // Graceful: Curated 100+ Academy list is already active
-            });
-
-        // Initial render
-        renderVideos();
+        buildVideoDots();
+        moveVideoTrack();
     }
 
     // ================= Interactive Medicine Margin & GST Calculator =================
