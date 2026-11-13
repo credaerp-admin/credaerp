@@ -36,7 +36,7 @@ CredaERP provides free web tools and statutory compliance templates for Indian r
 - **Starter Plan:** ₹1,699 / quarter or ₹4,999 / year (effective ₹416/mo). Core offline billing and inventory.
 - **Growth Plan:** ₹2,999 / quarter or ₹8,999 / year (effective ₹750/mo). Advanced batch control, WhatsApp invoicing, and GST reports.
 - **Premium Plan:** ₹3,499 / quarter or ₹9,999 / year (effective ₹833/mo). Complete toolkit with AI Business Chat Assistant.
-- **Loyalty Renewal AMC (from year 2 onwards):** Existing customers renew at reduced rates — Starter ₹2,999/yr, Growth ₹4,249/yr, Premium ₹5,999/yr.
+- **Loyalty Renewal AMC (from year 2 onwards):** Existing customers renew at reduced rates — Starter ₹2,999/yr, Growth ₹5,399/yr, Premium ₹5,999/yr.
 
 ## System Requirements
 
