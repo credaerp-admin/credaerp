@@ -1331,8 +1331,10 @@
                 <h3 id="modal-plan-title">Request Free Demo Key</h3>
                 <p>No card. No pressure. Use the complete workflow free for 3 months.</p>
             </div>
-            <form id="demo-form" name="demo-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <form id="demo-form" name="demo-request" method="POST" action="/" data-netlify="true" netlify data-netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="demo-request">
+                <input type="hidden" name="selected-plan" id="form-plan" value="Starter">
+                <input type="hidden" name="selected-product" id="form-product" value="CredaRx Pharmacy">
                 <p class="hidden" style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
                 <div class="form-group">
                     <label for="pharmacy-name">Business / Store Name</label>

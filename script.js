@@ -115,6 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modalTitle) {
                 modalTitle.textContent = `Request Free Demo Key (${planName})`;
             }
+            const planInput = document.getElementById('form-plan');
+            if (planInput) planInput.value = planName;
+            const prodInput = document.getElementById('form-product');
+            if (prodInput) prodInput.value = activeProduct.name;
             if (modal) {
                 modal.classList.add('active');
             }
@@ -188,36 +192,80 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Registering Demo Request...';
             submitBtn.disabled = true;
             
-            // Post form data to Netlify via AJAX
+            // Extract form values
             const formData = new FormData(demoForm);
-            fetch("/", {
+            if (!formData.get('form-name')) {
+                formData.set('form-name', 'demo-request');
+            }
+            
+            const businessName = formData.get('business-name') || 'Medical Store';
+            const whatsappNumber = formData.get('whatsapp-number') || '';
+            const email = formData.get('email') || '';
+            const plan = formData.get('selected-plan') || 'Starter';
+            const product = formData.get('selected-product') || activeProduct.name;
+            const gstin = formData.get('gstin') || '';
+
+            // 1. Post to Netlify Form endpoint
+            const bodyParams = new URLSearchParams(formData).toString();
+            const netlifyPost = fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            })
-             .then(() => {
-                 const modalContent = modal.querySelector('.modal-content');
-                 modalContent.innerHTML = `
-                     <button class="modal-close" style="position: absolute; top: 1.25rem; right: 1.25rem; background: transparent; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.5rem;">&times;</button>
-                     <div style="text-align: center; padding: 1.5rem 0 0.5rem 0;">
-                         <div style="font-size: 3.5rem; color: var(--color-success); margin-bottom: 0.75rem;">✓</div>
-                         <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; color: #fff;">Request Received!</h3>
-                         <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5;">Thank you! We will reach out to you on WhatsApp within 2 hours with your trial license key. You can download ${activeProduct.name} now:</p>
-                         
-                         <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; text-align: left;">
-                             <a data-modal-download="windows" href="#" class="cta-btn cta-btn-primary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">🖥️ Download ${activeProduct.name} for Windows (.exe)</a>
-                             <a data-modal-download="mac-silicon" href="#" class="cta-btn cta-btn-secondary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">🍏 Download ${activeProduct.name} for macOS (Apple Silicon)</a>
-                             <a data-modal-download="mac-intel" href="#" class="cta-btn cta-btn-secondary" style="text-align: center; padding: 0.75rem 1rem; font-size: 0.9rem;">💻 Download ${activeProduct.name} for macOS (Intel)</a>
-                         </div>
-                         
-                         <button class="form-submit-btn close-success-btn" style="max-width: 200px; margin: 0 auto;">Close</button>
-                     </div>
-                 `;
-                
-                document.querySelectorAll('[data-download]').forEach((source) => {
-                    const target = modalContent.querySelector(`[data-modal-download="${source.dataset.download}"]`);
-                    if (target) target.href = source.href;
-                });
+                body: bodyParams
+            });
+
+            // 2. Parallel backup dispatch to FormSubmit for direct email delivery to credaerp@gmail.com
+            const emailBackupPost = fetch("https://formsubmit.co/ajax/credaerp@gmail.com", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    _subject: `New CredaERP Demo Request: ${businessName} (${product} - ${plan})`,
+                    "Store / Business Name": businessName,
+                    "Mobile / WhatsApp": whatsappNumber,
+                    "Email": email,
+                    "Product Edition": product,
+                    "Requested Plan": plan,
+                    "GSTIN": gstin || 'Not Provided',
+                    _template: "table"
+                })
+            }).catch(() => null);
+
+            Promise.allSettled([netlifyPost, emailBackupPost]).then(() => {
+                const modalContent = modal.querySelector('.modal-content');
+                const whatsappMsg = encodeURIComponent(
+                    `Hello CredaERP team! I just submitted a demo request for "${businessName}" (${product} - ${plan} Plan, Mobile: ${whatsappNumber}). Please help me setup the software.`
+                );
+
+                modalContent.innerHTML = `
+                    <button class="modal-close" style="position: absolute; top: 1.25rem; right: 1.25rem; background: transparent; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.5rem;">&times;</button>
+                    <div style="text-align: center; padding: 1.25rem 0 0.5rem 0;">
+                        <div style="width: 60px; height: 60px; margin: 0 auto 1rem; border-radius: 50%; background: rgba(34, 197, 94, 0.15); border: 2px solid #22c55e; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #22c55e;">✓</div>
+                        <h3 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 0.6rem; color: #fff;">Demo Request Received!</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 0.92rem; line-height: 1.55;">
+                            Thank you, <strong>${businessName}</strong>! Because CredaERP provides specialized vertical software (<strong>CredaRx</strong> for Pharmacies and <strong>CredaRetail</strong> for Retail Stores), our technical representative will personally assist you with complete guided setup.
+                        </p>
+                        
+                        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 1rem 1.15rem; margin-bottom: 1.5rem; text-align: left;">
+                            <div style="font-size: 0.84rem; font-weight: 700; color: #93c5fd; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.04em;">Next Steps from our team:</div>
+                            <ul style="color: var(--text-secondary); font-size: 0.84rem; padding-left: 1.2rem; line-height: 1.6; margin: 0;">
+                                <li>Our representative will reach out on <strong>${whatsappNumber}</strong> within 2 hours.</li>
+                                <li>We provide the exact installer configured for your specific counter requirements.</li>
+                                <li>We assist with 5-minute inventory/medicine catalog import and activate your free 3-month trial license.</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <a href="https://wa.me/918777527458?text=${whatsappMsg}" target="_blank" rel="noopener" class="cta-btn cta-btn-whatsapp" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 1.25rem; font-size: 0.92rem; font-weight: 700; text-decoration: none;">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.859-4.42 9.863-9.864.002-2.634-1.02-5.11-2.884-6.978C16.59 1.897 14.113.872 11.477.872c-5.448 0-9.873 4.417-9.877 9.861-.001 1.77.461 3.5 1.34 5.024l-.993 3.63 3.71-.973zm11.365-7.447c-.29-.145-1.716-.848-1.982-.946-.265-.097-.459-.145-.653.145-.19.29-.738.946-.906 1.14-.167.19-.335.213-.625.069-1.523-.76-2.585-1.286-3.606-3.045-.27-.463.27-.429.773-1.43.084-.17.042-.317-.02-.463-.063-.146-.554-1.336-.76-1.83-.2-.485-.404-.42-.554-.427-.143-.008-.308-.009-.473-.009-.166 0-.436.062-.663.308-.228.246-.87.85-.87 2.07 0 1.22.887 2.4.985 2.54.097.14 1.745 2.664 4.225 3.733.59.255 1.05.407 1.41.52.593.189 1.133.162 1.558.098.474-.071 1.716-.7 1.96-1.378.246-.677.246-1.258.172-1.378-.074-.12-.27-.193-.56-.338z"/></svg>
+                                <span>Fast-Track Setup: Chat on WhatsApp Now</span>
+                            </a>
+                            <button type="button" class="form-submit-btn close-success-btn" style="padding: 0.75rem 1rem; font-size: 0.9rem; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff;">Close Window</button>
+                        </div>
+                    </div>
+                `;
+
                 const successCloseHandler = () => {
                     modal.classList.remove('active');
                     setTimeout(() => {
@@ -227,12 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 modalContent.querySelector('.modal-close').addEventListener('click', successCloseHandler);
                 modalContent.querySelector('.close-success-btn').addEventListener('click', successCloseHandler);
-            })
-            .catch((error) => {
-                console.error('Netlify Form submission error:', error);
-                submitBtn.textContent = 'Send My Free Trial Request';
-                submitBtn.disabled = false;
-                alert('Something went wrong. Please try again or contact support.');
             });
         });
     }
